@@ -1,3 +1,81 @@
-@layer theme, base, clerk, components, utilities; /* Ensure Clerk is compatible with Tailwind CSS v4 */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap');
+@import "tailwindcss";
 
-@import 'tailwindcss';
+html {
+  scroll-behavior: smooth;
+}
+
+@layer base {
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-bold font-sans;
+  }
+
+  p {
+    @apply font-normal font-sans;
+  }
+
+  button, a {
+    @apply font-semibold font-sans;
+  }
+}
+
+
+
+@theme {
+  --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
+
+  --color-cream: #f1ece1;
+  --color-gold: #daa65b;
+  --color-sky: #86c0cd;
+  --color-navy: #345c72;
+  --color-sage: #6a9672;
+  --color-coral: #d48455;
+  --color-coffee: #5c4738;
+}
+
+@layer utilities {
+  @keyframes fade-in-up {
+    0% {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    100% {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  .animate-fade-in-up {
+    animation: fade-in-up 1s ease-out forwards;
+    animation-fill-mode: forwards;
+  }
+
+  @keyframes fade-in-scale {
+  0% {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.animate-fade-in-scale {
+  animation: fade-in-scale 1s ease-out forwards;
+  animation-fill-mode: forwards;
+}
+  .delay-400 {
+    animation-delay: 400ms;
+  }
+  .delay-600 {
+    animation-delay: 600ms;
+  }
+  .delay-800 {
+    animation-delay: 800ms;
+  }
+  .delay-1000 {
+    animation-delay: 1000ms;
+  }
+}
+
