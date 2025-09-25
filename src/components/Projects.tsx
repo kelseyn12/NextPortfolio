@@ -68,9 +68,9 @@ export default function Projects() {
         </h2>
 
         <div className="grid gap-10 md:grid-cols-2 lg:grid-cols-3">
-          {projects.map((project, idx) => (
+          {projects.map(project => (
             <div
-              key={idx}
+              key={project.title}
               className={`group relative h-80 w-full overflow-hidden rounded-lg shadow-md transition hover:shadow-xl
     ${project.accent === 'gold' ? 'bg-gold/80' : ''}
     ${project.accent === 'coral' ? 'bg-coral/80' : ''}
@@ -104,9 +104,9 @@ export default function Projects() {
                 <h3 className="mb-2 text-2xl font-bold text-cream">{project.title}</h3>
                 <p className="mb-4 text-cream">{project.description}</p>
                 <div className="mb-4 flex flex-wrap justify-center gap-2">
-                  {project.tech.map((tech, i) => (
+                  {project.tech.map(tech => (
                     <span
-                      key={i}
+                      key={tech}
                       className="rounded-full bg-white/20 px-3 py-1 text-sm text-cream"
                     >
                       {tech}

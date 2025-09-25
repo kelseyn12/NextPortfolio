@@ -1,3 +1,5 @@
+import Image from 'next/image';
+
 export default function Hero() {
   return (
     <section
@@ -29,9 +31,12 @@ export default function Hero() {
 
         {/* Right: Photo */}
         <div className="flex justify-center">
-          <img
-            src="../images/kelsey.jpeg"
+          <Image
+            src="/kelsey.jpeg"
             alt="Kelsey Nocek"
+            width={400}
+            height={500}
+            priority
             className="animate-fade-in-scale w-full max-w-sm rounded-lg object-cover opacity-0 shadow-lg delay-600 md:max-w-md"
           />
         </div>

@@ -24,6 +24,7 @@ export default function Navbar() {
 
         {/* Mobile Hamburger */}
         <button
+          type="button"
           className="text-2xl text-navy focus:outline-none md:hidden"
           onClick={() => setMenuOpen(!menuOpen)}
         >
