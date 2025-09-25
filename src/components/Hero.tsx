@@ -2,18 +2,18 @@ export default function Hero() {
   return (
     <section
       id="hero"
-      className="bg-cream min-h-screen flex items-center px-6"
+      className="flex min-h-screen items-center bg-cream px-6"
     >
-      <div className="grid md:grid-cols-[3fr_2fr] gap-16 items-center max-w-6xl mx-auto">
+      <div className="mx-auto grid max-w-6xl items-center gap-16 md:grid-cols-[3fr_2fr]">
         {/* Left: Text */}
         <div className="text-center md:text-left">
-          <h1 className="text-6xl md:text-7xl font-extrabold text-navy mb-2 leading-tight opacity-0 animate-fade-in-up delay-200">
+          <h1 className="animate-fade-in-up mb-2 text-6xl leading-tight font-extrabold text-navy opacity-0 delay-200 md:text-7xl">
             Hello, I'm Kelsey!
           </h1>
-          <h2 className="text-3xl md:text-4xl font-semibold text-navy mb-6 leading-snug opacity-0 animate-fade-in-up delay-400">
+          <h2 className="animate-fade-in-up mb-6 text-3xl leading-snug font-semibold text-navy opacity-0 delay-400 md:text-4xl">
             Designer & Developer.
           </h2>
-          <p className="text-xl md:text-2xl text-coral mb-10 leading-relaxed max-w-xl opacity-0 animate-fade-in-up delay-600">
+          <p className="animate-fade-in-up mb-10 max-w-xl text-xl leading-relaxed text-coral opacity-0 delay-600 md:text-2xl">
             I am a full stack engineer (learning mobile too!) based in Duluth,
             Minnesota. From playing tunes on a stage to lines of code on a web
             page, creating brings me joy. By combining logic and design, I make
@@ -21,7 +21,7 @@ export default function Hero() {
           </p>
           <a
             href="#projects"
-            className="inline-block bg-gold text-cream font-semibold px-6 py-3 rounded-lg shadow-md hover:bg-sage transition transform hover:-translate-y-0.5 opacity-0 animate-fade-in-up delay-800"
+            className="animate-fade-in-up inline-block transform rounded-lg bg-gold px-6 py-3 font-semibold text-cream opacity-0 shadow-md transition delay-800 hover:-translate-y-0.5 hover:bg-sage"
           >
             See My Work
           </a>
@@ -32,13 +32,10 @@ export default function Hero() {
           <img
             src="../images/kelsey.jpeg"
             alt="Kelsey Nocek"
-            className="rounded-lg shadow-lg w-full max-w-sm md:max-w-md object-cover opacity-0 animate-fade-in-scale delay-600"
+            className="animate-fade-in-scale w-full max-w-sm rounded-lg object-cover opacity-0 shadow-lg delay-600 md:max-w-md"
           />
         </div>
       </div>
     </section>
   );
 }
-
-
-

@@ -1,13 +1,14 @@
-import "../styles/global.css";
-import Navbar from "@/components/Navbar";
+import type { Metadata } from 'next';
+import Navbar from '@/components/Navbar';
+import '../styles/global.css';
 
-export const metadata = {
-  title: "Kelsey Nocek | Portfolio",
-  description: "Creative developer portfolio site for Kelsey Nocek",
+export const metadata: Metadata = {
+  title: 'Kelsey Nocek | Portfolio',
+  description: 'Creative developer portfolio site for Kelsey Nocek',
   icons: {
-    icon: "/favicon.ico",
-    shortcut: "/favicon.png",
-    apple: "/apple-touch-icon.png",
+    icon: '/favicon.ico',
+    shortcut: '/favicon.png',
+    apple: '/apple-touch-icon.png',
   },
 };
 

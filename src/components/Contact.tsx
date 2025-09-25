@@ -1,21 +1,21 @@
-import { FaLinkedin, FaGithub, FaEnvelope, FaFileDownload } from "react-icons/fa";
+import { FaEnvelope, FaFileDownload, FaGithub, FaLinkedin } from 'react-icons/fa';
 
 export default function Contact() {
   return (
-    <section id="contact" className="bg-navy text-cream py-16 px-6">
-      <div className="max-w-4xl mx-auto text-center">
-        <h2 className="text-4xl md:text-5xl font-bold mb-6">Let’s Connect!</h2>
+    <section id="contact" className="bg-navy px-6 py-16 text-cream">
+      <div className="mx-auto max-w-4xl text-center">
+        <h2 className="mb-6 text-4xl font-bold md:text-5xl">Let’s Connect!</h2>
         <p className="mb-10 text-lg opacity-90">
           I’d love to chat about projects, collaborations, or just share ideas.
         </p>
 
         {/* Icons Row */}
-        <div className="flex justify-center gap-8 mb-12 text-3xl">
+        <div className="mb-12 flex justify-center gap-8 text-3xl">
           <a
             href="https://www.linkedin.com/in/kelseynocek12"
             target="_blank"
             rel="noopener noreferrer"
-            className="hover:text-gold transition"
+            className="transition hover:text-gold"
           >
             <FaLinkedin />
           </a>
@@ -23,20 +23,20 @@ export default function Contact() {
             href="https://github.com/kelseyn12"
             target="_blank"
             rel="noopener noreferrer"
-            className="hover:text-gold transition"
+            className="transition hover:text-gold"
           >
             <FaGithub />
           </a>
           <a
             href="mailto:kelseynocek12@gmail.com"
-            className="hover:text-gold transition"
+            className="transition hover:text-gold"
           >
             <FaEnvelope />
           </a>
           <a
             href="/resume.pdf"
             download
-            className="hover:text-gold transition"
+            className="transition hover:text-gold"
           >
             <FaFileDownload />
           </a>
@@ -44,7 +44,11 @@ export default function Contact() {
 
         {/* Footer note */}
         <p className="text-sm opacity-70">
-          © {new Date().getFullYear()} Kelsey Nocek · Built with Next.js & Tailwind CSS
+          ©
+          {' '}
+          {new Date().getFullYear()}
+          {' '}
+          Kelsey Nocek · Built with Next.js & Tailwind CSS
         </p>
       </div>
     </section>
