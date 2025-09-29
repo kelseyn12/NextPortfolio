@@ -118,7 +118,7 @@ export default function Projects() {
                   href={project.link}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="mt-4 inline-block rounded-lg border-2 border-cream px-5 py-2 font-medium text-navy transition hover:bg-cream hover:text-navy"
+                  className="mt-4 inline-block rounded-lg border-2 border-cream px-5 py-2 font-medium text-cream transition hover:bg-cream hover:text-navy"
                 >
                   View Project
                 </a>
