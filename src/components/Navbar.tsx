@@ -10,6 +10,7 @@ export default function Navbar() {
         {/* Logo / Name */}
         <a href="#hero" className="text-xl font-extrabold tracking-tight">
           <span className="text-navy">Kelsey</span>
+          {' '}
           <span className="text-teal">Nocek</span>
         </a>
 
