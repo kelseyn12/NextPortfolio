@@ -63,6 +63,7 @@ export default function Contact() {
           Kelsey Nocek · Built with
           {' '}
           <span className="text-teal">Next.js</span>
+          {' '}
           &amp;
           {' '}
           <span className="text-teal">Tailwind CSS</span>
