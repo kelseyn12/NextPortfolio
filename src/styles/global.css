@@ -12,16 +12,16 @@ html {
   h4,
   h5,
   h6 {
-    @apply font-bold font-sans;
+    @apply font-sans font-bold;
   }
 
   p {
-    @apply font-normal font-sans;
+    @apply font-sans font-normal;
   }
 
   button,
   a {
-    @apply font-semibold font-sans;
+    @apply font-sans font-semibold;
   }
 }
 
@@ -32,7 +32,8 @@ html {
   --color-teal: #64c7d1; /*primary accent*/
   --color-coral: #e59190; /* rose/pink accent */
   --color-steel: #668ea5; /*blue/gray body text */
-  --color-navy: #1A3B58; /*headline/primary text */
+  --color-navy: #1a3b58; /*headline/primary text */
+  --color-peach: #f4d2b3; /*light peach background */
 }
 
 @layer utilities {

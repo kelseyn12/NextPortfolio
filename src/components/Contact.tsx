@@ -1,4 +1,9 @@
-import { FaEnvelope, FaFileDownload, FaGithub, FaLinkedin } from 'react-icons/fa';
+import {
+  FaEnvelope,
+  FaFileDownload,
+  FaGithub,
+  FaLinkedin,
+} from 'react-icons/fa';
 
 export default function Contact() {
   return (
@@ -8,7 +13,7 @@ export default function Contact() {
         <h2 className="mb-8 inline-block border-b-4 border-teal pb-2 text-4xl font-bold md:text-5xl">
           Let’s Connect
         </h2>
-        <p className="mb-10 text-lg text-cream/80 max-w-2xl mx-auto">
+        <p className="mx-auto mb-10 max-w-2xl text-lg text-cream/80">
           I’d love to chat about projects, collaborations, or just share ideas.
         </p>
 
@@ -19,7 +24,7 @@ export default function Contact() {
             aria-label="LinkedIn"
             target="_blank"
             rel="noopener noreferrer"
-            className="transition text-cream hover:text-teal transform hover:scale-110 hover:shadow-[0_0_15px_#64c7d1]"
+            className="text-cream transition transform hover:text-teal hover:shadow-[0_0_15px_#64c7d1] hover:scale-110"
           >
             <FaLinkedin />
           </a>
@@ -28,14 +33,14 @@ export default function Contact() {
             aria-label="GitHub"
             target="_blank"
             rel="noopener noreferrer"
-            className="transition text-cream hover:text-teal transform hover:scale-110 hover:shadow-[0_0_15px_#64c7d1]"
+            className="text-cream transition transform hover:text-teal hover:shadow-[0_0_15px_#64c7d1] hover:scale-110"
           >
             <FaGithub />
           </a>
           <a
             href="mailto:kelseynocek12@gmail.com"
             aria-label="Email"
-            className="transition text-cream hover:text-teal transform hover:scale-110 hover:shadow-[0_0_15px_#64c7d1]"
+            className="text-cream transition transform hover:text-teal hover:shadow-[0_0_15px_#64c7d1] hover:scale-110"
           >
             <FaEnvelope />
           </a>
@@ -43,7 +48,7 @@ export default function Contact() {
             href="/resume.pdf"
             aria-label="Download Resume"
             download
-            className="transition text-cream hover:text-teal transform hover:scale-110 hover:shadow-[0_0_15px_#64c7d1]"
+            className="text-cream transition transform hover:text-teal hover:shadow-[0_0_15px_#64c7d1] hover:scale-110"
           >
             <FaFileDownload />
           </a>
@@ -51,8 +56,15 @@ export default function Contact() {
 
         {/* Footer note */}
         <p className="text-sm text-cream/70">
-          © {new Date().getFullYear()} Kelsey Nocek · Built with{' '}
-          <span className="text-teal">Next.js</span> &{' '}
+          ©
+          {' '}
+          {new Date().getFullYear()}
+          {' '}
+          Kelsey Nocek · Built with
+          {' '}
+          <span className="text-teal">Next.js</span>
+          &amp;
+          {' '}
           <span className="text-teal">Tailwind CSS</span>
         </p>
       </div>

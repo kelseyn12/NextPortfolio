@@ -40,7 +40,14 @@ export default function Projects() {
         'Mobile app pulling NOAA, NDBC, and Windy API data to deliver surf conditions and community features.',
       image: '/images/surfApp.png',
       link: 'https://github.com/kelseyn12/surfSUP',
-      tech: ['React Native', 'JavaScript', 'APIs', 'Expo', 'Firebase', 'Authentication'],
+      tech: [
+        'React Native',
+        'JavaScript',
+        'APIs',
+        'Expo',
+        'Firebase',
+        'Authentication',
+      ],
     },
     {
       title: 'Bikepacker Board',
@@ -58,7 +65,7 @@ export default function Projects() {
   return (
     <section id="projects" className="bg-white px-6 py-20">
       <div className="mx-auto max-w-6xl text-center">
-        <h2 className="mb-12 text-4xl font-bold text-navy md:text-5xl">
+        <h2 className="text-navy mb-12 text-4xl font-bold md:text-5xl">
           Featured Projects
         </h2>
 
@@ -68,13 +75,7 @@ export default function Projects() {
             return (
               <div
                 key={project.title}
-                className={`group relative h-80 w-full overflow-hidden rounded-lg border-2 shadow-sm transition hover:shadow-xl
-                  ${accent === 'teal' ? 'border-teal' : ''}
-                  ${accent === 'steel' ? 'border-steel' : ''}
-                  ${accent === 'coral' ? 'border-coral' : ''}
-                  ${accent === 'cream' ? 'border-cream' : ''}
-                  ${accent === 'navy' ? 'border-navy' : ''}
-                `}
+                className={`group relative h-80 w-full overflow-hidden rounded-lg border-2 shadow-sm transition hover:shadow-xl ${accent === 'teal' ? 'border-teal' : ''} ${accent === 'steel' ? 'border-steel' : ''} ${accent === 'coral' ? 'border-coral' : ''} ${accent === 'cream' ? 'border-cream' : ''} ${accent === 'navy' ? 'border-navy' : ''} `}
               >
                 {/* Project Image */}
                 <Image
@@ -86,13 +87,7 @@ export default function Projects() {
 
                 {/* Overlay */}
                 <div
-                  className={`absolute inset-0 flex flex-col items-center justify-center px-4 text-center opacity-0 transition duration-500 group-hover:opacity-100
-                    ${accent === 'teal' ? 'bg-teal/90' : ''}
-                    ${accent === 'steel' ? 'bg-steel/90' : ''}
-                    ${accent === 'coral' ? 'bg-coral/90' : ''}
-                    ${accent === 'cream' ? 'bg-cream/90' : ''}
-                    ${accent === 'navy' ? 'bg-navy/90' : ''}
-                  `}
+                  className={`absolute inset-0 flex flex-col items-center justify-center px-4 text-center opacity-0 transition duration-500 group-hover:opacity-100 ${accent === 'teal' ? 'bg-teal/90' : ''} ${accent === 'steel' ? 'bg-steel/90' : ''} ${accent === 'coral' ? 'bg-coral/90' : ''} ${accent === 'cream' ? 'bg-cream/90' : ''} ${accent === 'navy' ? 'bg-navy/90' : ''} `}
                 >
                   <h3 className="mb-2 text-2xl font-bold text-white">
                     {project.title}
@@ -102,7 +97,7 @@ export default function Projects() {
                     {project.tech.map(tech => (
                       <span
                         key={tech}
-                        className="rounded-full border px-3 py-1 text-sm text-white/90 border-white/40"
+                        className="rounded-full border border-white/40 px-3 py-1 text-sm text-white/90"
                       >
                         {tech}
                       </span>
@@ -112,7 +107,7 @@ export default function Projects() {
                     href={project.link}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="mt-4 inline-block rounded-lg border-2 border-white px-5 py-2 font-medium text-white transition hover:bg-white hover:text-navy"
+                    className="hover:text-navy mt-4 inline-block rounded-lg border-2 border-white px-5 py-2 font-medium text-white transition hover:bg-white"
                   >
                     View Project
                   </a>
