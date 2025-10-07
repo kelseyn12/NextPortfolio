@@ -5,7 +5,7 @@ export default function Projects() {
     {
       title: 'Lets Connect',
       description:
-        'A small web app experiment in digital serendipity. Type a word, and if someone else types the same one within a few minutes — you are instantly connected in a private, anonymous chat.',
+        'A small web app experiment in digital serendipity. Type a word, and if someone else types the same one within a few minutes -you are instantly connected in a private, anonymous chat.',
       image: '/images/letsconnect.png',
       link: 'https://lets-connect-ebon.vercel.app/',
       tech: ['React + Vite + TypeScript', 'Tailwind CSS', 'React Router', 'Firebase (Auth + Firestore)', 'Firestore Subscriptions'],
@@ -83,7 +83,7 @@ export default function Projects() {
             return (
               <div
                 key={project.title}
-                className={`group relative h-80 w-full overflow-hidden rounded-lg border-2 shadow-sm transition hover:shadow-xl ${accent === 'teal' ? 'border-teal' : ''} ${accent === 'steel' ? 'border-steel' : ''} ${accent === 'coral' ? 'border-coral' : ''} ${accent === 'cream' ? 'border-cream' : ''} ${accent === 'navy' ? 'border-navy' : ''} `}
+                className={`group relative w-full overflow-hidden rounded-lg border-2 shadow-sm transition hover:shadow-xl ${accent === 'teal' ? 'border-teal' : ''} ${accent === 'steel' ? 'border-steel' : ''} ${accent === 'coral' ? 'border-coral' : ''} ${accent === 'cream' ? 'border-cream' : ''} ${accent === 'navy' ? 'border-navy' : ''} `}
               >
                 {/* Project Image */}
                 <Image
