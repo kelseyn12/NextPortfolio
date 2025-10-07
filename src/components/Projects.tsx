@@ -2,13 +2,13 @@ import Image from 'next/image';
 
 export default function Projects() {
   const projects = [
-      {
+    {
       title: 'Lets Connect',
       description:
-        'a small web app experiment in digital serendipity. Type a word, and if someone else types the same one within a few minutes — you are instantly connected in a private, anonymous chat.',
+        'A small web app experiment in digital serendipity. Type a word, and if someone else types the same one within a few minutes — you are instantly connected in a private, anonymous chat.',
       image: '/images/letsconnect.png',
       link: 'https://lets-connect-ebon.vercel.app/',
-      tech: ['React + Vite + TypeScript', 'Tailwind CSS', 'React Router', 'Firebase (Auth + Firestore)','Firestore Subscriptions'],
+      tech: ['React + Vite + TypeScript', 'Tailwind CSS', 'React Router', 'Firebase (Auth + Firestore)', 'Firestore Subscriptions'],
     },
     {
       title: 'Continental Ski & Bike Website',
