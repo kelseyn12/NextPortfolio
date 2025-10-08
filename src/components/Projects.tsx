@@ -83,7 +83,7 @@ export default function Projects() {
             return (
               <div
                 key={project.title}
-                className={`group relative w-full overflow-hidden rounded-lg border-2 shadow-sm transition hover:shadow-xl ${accent === 'teal' ? 'border-teal' : ''} ${accent === 'steel' ? 'border-steel' : ''} ${accent === 'coral' ? 'border-coral' : ''} ${accent === 'cream' ? 'border-cream' : ''} ${accent === 'navy' ? 'border-navy' : ''} `}
+                className={`group relative min-h-[20rem] w-full overflow-hidden rounded-lg border-2 shadow-sm transition hover:shadow-xl ${accent === 'teal' ? 'border-teal' : ''} ${accent === 'steel' ? 'border-steel' : ''} ${accent === 'coral' ? 'border-coral' : ''} ${accent === 'cream' ? 'border-cream' : ''} ${accent === 'navy' ? 'border-navy' : ''} `}
               >
                 {/* Project Image */}
                 <Image
