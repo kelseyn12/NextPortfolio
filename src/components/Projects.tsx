@@ -83,14 +83,19 @@ export default function Projects() {
             return (
               <div
                 key={project.title}
-                className={`group relative h-[26rem] w-full overflow-hidden rounded-lg border-2 shadow-sm transition hover:shadow-xl ${accent === 'teal' ? 'border-teal' : ''} ${accent === 'steel' ? 'border-steel' : ''} ${accent === 'coral' ? 'border-coral' : ''} ${accent === 'cream' ? 'border-cream' : ''} ${accent === 'navy' ? 'border-navy' : ''} `}
+                className={`group relative h-[26rem] w-full overflow-hidden rounded-lg border-2 shadow-sm transition hover:shadow-xl
+    ${accent === 'teal' ? 'border-teal bg-teal/5' : ''}
+    ${accent === 'steel' ? 'border-steel bg-steel/5' : ''}
+    ${accent === 'coral' ? 'border-coral bg-coral/5' : ''}
+    ${accent === 'cream' ? 'border-cream bg-cream/5' : ''}
+    ${accent === 'navy' ? 'border-navy bg-navy/5' : ''}`}
               >
-                {/* Project Image */}
                 <Image
                   src={project.image}
                   alt={project.title}
                   fill
-                  className="object-cover transition-transform duration-500 group-hover:scale-105"
+                  className="object-contain object-center p-2 transition-opacity duration-300 group-hover:opacity-90"
+                  sizes="(min-width:1024px) 33vw, (min-width:768px) 50vw, 100vw"
                 />
 
                 {/* Overlay */}
