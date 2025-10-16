@@ -50,7 +50,7 @@ export default function Hero() {
           <div className="bg-steel absolute top-24 -left-18 hidden h-52 w-2 md:block"></div>
 
           <Image
-            src="/kelsey.jpeg"
+            src="/kelseyTwo.JPG"
             alt="Kelsey Nocek"
             width={420}
             height={520}
