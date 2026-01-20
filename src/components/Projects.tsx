@@ -27,14 +27,6 @@ export default function Projects() {
       tech: ['HTML', 'CSS', 'JavaScript', 'WorkStand'],
     },
     {
-      title: 'Village Programs Mockup',
-      description:
-        'Next.js mockup enabling people to search and filter through available programs.',
-      image: '/images/village.png',
-      link: 'https://github.com/kelseyn12/village-mock',
-      tech: ['Next.js', 'JavaScript', 'Material UI', 'CSS'],
-    },
-    {
       title: 'Duluth Gear Exchange',
       description:
         'Originally built in Gatsby, later transitioned to Squarespace while keeping design consistent.',
