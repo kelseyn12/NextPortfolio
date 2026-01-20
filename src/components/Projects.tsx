@@ -3,6 +3,14 @@ import Image from 'next/image';
 export default function Projects() {
   const projects = [
     {
+      title: 'Yosemite Climbing Association',
+      description:
+        'A Shopify app supporting Yosemite Climbing Association and the Yosemite Climbing Museum',
+      image: '/images/yosemite.png',
+      link: 'https://yosemiteclimbing.myshopify.com/',
+      tech: ['Shopify', 'GiveCloud', 'SquareSpace', 'Google Analytics', 'HTML', 'CSS', 'JavaScript'],
+    },
+    {
       title: 'Lets Connect',
       description:
         'A small web app experiment in digital serendipity. Type a word, and if someone else types the same one within a few minutes -you are instantly connected in a private, anonymous chat.',
@@ -79,7 +87,7 @@ export default function Projects() {
 
         <div className="grid gap-10 md:grid-cols-2 lg:grid-cols-3">
           {projects.map((project, idx) => {
-            const accent = accents[idx % accents.length]; // cycle through 3 colors
+            const accent = accents[idx % accents.length]; // cycle through colors
             return (
               <div
                 key={project.title}
