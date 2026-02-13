@@ -16,7 +16,7 @@ html {
   }
 
   p {
-    @apply font-sans font-normal;
+    @apply font-sans font-normal leading-loose;
   }
 
   button,

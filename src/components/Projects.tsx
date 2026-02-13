@@ -71,9 +71,9 @@ export default function Projects() {
   const accents = ['teal', 'steel', 'coral', 'cream', 'navy'];
 
   return (
-    <section id="projects" className="bg-white px-6 py-20">
+    <section id="projects" className="border-t border-steel/5 bg-white px-6 pt-32 pb-40 md:pt-36 md:pb-48">
       <div className="mx-auto max-w-6xl text-center">
-        <h2 className="text-navy mb-12 text-4xl font-bold md:text-5xl">
+        <h2 className="mb-12 text-4xl font-bold text-navy md:text-5xl">
           Featured Projects
         </h2>
 
@@ -83,7 +83,7 @@ export default function Projects() {
             return (
               <div
                 key={project.title}
-                className={`group relative h-[26rem] w-full overflow-hidden rounded-lg border-2 shadow-sm transition hover:shadow-xl
+                className={`group relative h-[26rem] w-full overflow-hidden rounded-xl border-2 shadow-[0_2px_12px_rgba(0,0,0,0.06)] transition duration-200 ease-in-out hover:-translate-y-1 hover:shadow-[0_10px_24px_rgba(0,0,0,0.08)]
     ${accent === 'teal' ? 'border-teal bg-teal/5' : ''}
     ${accent === 'steel' ? 'border-steel bg-steel/5' : ''}
     ${accent === 'coral' ? 'border-coral bg-coral/5' : ''}
@@ -94,18 +94,20 @@ export default function Projects() {
                   src={project.image}
                   alt={project.title}
                   fill
-                  className="object-contain object-center p-2 transition-opacity duration-300 group-hover:opacity-90"
+                  className="object-contain object-center p-2 transition duration-200 ease-in-out group-hover:opacity-90"
                   sizes="(min-width:1024px) 33vw, (min-width:768px) 50vw, 100vw"
                 />
 
                 {/* Overlay */}
                 <div
-                  className={`absolute inset-0 flex flex-col items-center justify-center px-4 text-center opacity-0 transition duration-500 group-hover:opacity-100 ${accent === 'teal' ? 'bg-teal/90' : ''} ${accent === 'steel' ? 'bg-steel/90' : ''} ${accent === 'coral' ? 'bg-coral/90' : ''} ${accent === 'cream' ? 'bg-cream/90' : ''} ${accent === 'navy' ? 'bg-navy/90' : ''} `}
+                  className={`absolute inset-0 flex flex-col items-center justify-start overflow-y-auto px-5 py-6 text-center opacity-0 transition duration-200 ease-in-out group-hover:opacity-100 ${accent === 'teal' ? 'bg-teal/90' : ''} ${accent === 'steel' ? 'bg-steel/90' : ''} ${accent === 'coral' ? 'bg-coral/90' : ''} ${accent === 'cream' ? 'bg-cream/90' : ''} ${accent === 'navy' ? 'bg-navy/90' : ''} `}
                 >
                   <h3 className="mb-2 text-2xl font-bold text-white">
                     {project.title}
                   </h3>
-                  <p className="mb-4 text-white">{project.description}</p>
+                  <p className="mb-4 text-white">
+                    {project.description}
+                  </p>
                   <div className="mb-4 flex flex-wrap justify-center gap-2">
                     {project.tech.map(tech => (
                       <span
@@ -120,7 +122,7 @@ export default function Projects() {
                     href={project.link}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="hover:text-navy mt-4 inline-block rounded-lg border-2 border-white px-5 py-2 font-medium text-white transition hover:bg-white"
+                    className="mt-4 inline-block rounded-xl border-2 border-white px-5 py-2 font-medium text-white transition duration-200 ease-in-out hover:bg-white hover:text-navy"
                   >
                     View Project
                   </a>

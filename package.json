@@ -7,6 +7,7 @@
   "scripts": {
     "dev:spotlight": "npx @spotlightjs/spotlight",
     "dev:next": "next dev --turbopack",
+    "dev:local": "sh -c 'ulimit -n 10240 2>/dev/null; exec next dev --turbopack -H 127.0.0.1'",
     "dev": "run-p db-server:file dev:*",
     "build:next": "next build",
     "build": "run-p db-server:memory build:* --race",

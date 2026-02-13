@@ -7,7 +7,7 @@ import {
 
 export default function Contact() {
   return (
-    <section id="contact" className="bg-navy px-6 py-20 text-cream">
+    <section id="contact" className="bg-navy px-6 py-32 text-cream md:py-36">
       <div className="mx-auto max-w-4xl text-center">
         {/* Heading */}
         <h2 className="mb-8 inline-block border-b-4 border-teal pb-2 text-4xl font-bold md:text-5xl">
@@ -24,7 +24,7 @@ export default function Contact() {
             aria-label="LinkedIn"
             target="_blank"
             rel="noopener noreferrer"
-            className="text-cream transition transform hover:text-teal hover:shadow-[0_0_15px_#64c7d1] hover:scale-110"
+            className="text-cream transition duration-300 ease-in-out hover:scale-105 hover:text-teal/90"
           >
             <FaLinkedin />
           </a>
@@ -33,14 +33,14 @@ export default function Contact() {
             aria-label="GitHub"
             target="_blank"
             rel="noopener noreferrer"
-            className="text-cream transition transform hover:text-teal hover:shadow-[0_0_15px_#64c7d1] hover:scale-110"
+            className="text-cream transition duration-300 ease-in-out hover:scale-105 hover:text-teal/90"
           >
             <FaGithub />
           </a>
           <a
             href="mailto:kelseynocek12@gmail.com"
             aria-label="Email"
-            className="text-cream transition transform hover:text-teal hover:shadow-[0_0_15px_#64c7d1] hover:scale-110"
+            className="text-cream transition duration-300 ease-in-out hover:scale-105 hover:text-teal/90"
           >
             <FaEnvelope />
           </a>
@@ -48,7 +48,7 @@ export default function Contact() {
             href="/resume.pdf"
             aria-label="Download Resume"
             download
-            className="text-cream transition transform hover:text-teal hover:shadow-[0_0_15px_#64c7d1] hover:scale-110"
+            className="text-cream transition duration-300 ease-in-out hover:scale-105 hover:text-teal/90"
           >
             <FaFileDownload />
           </a>
