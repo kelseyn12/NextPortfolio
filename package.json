@@ -4,6 +4,9 @@
   "engines": {
     "node": "20.x || 22.x"
   },
+  "overrides": {
+    "eslint-plugin-react-refresh": "0.4.20"
+  },
   "scripts": {
     "dev:spotlight": "npx @spotlightjs/spotlight",
     "dev:next": "next dev --turbopack",
@@ -87,7 +90,7 @@
     "eslint-plugin-jsx-a11y": "^6.10.2",
     "eslint-plugin-playwright": "^2.2.2",
     "eslint-plugin-react-hooks": "^5.2.0",
-    "eslint-plugin-react-refresh": "^0.4.20",
+    "eslint-plugin-react-refresh": "0.4.20",
     "eslint-plugin-storybook": "^9.1.2",
     "eslint-plugin-tailwindcss": "^4.0.0-beta.0",
     "knip": "^5.62.0",
