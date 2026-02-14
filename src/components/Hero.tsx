@@ -9,14 +9,14 @@ export default function Hero() {
       <div className="mx-auto grid max-w-6xl items-center gap-12 md:grid-cols-[3fr_2fr] md:gap-20">
         {/* Left: Text */}
         <div className="mx-auto max-w-lg text-center md:mx-0 md:text-left">
-          <h1 className="animate-fade-in-up mb-6 text-6xl leading-tight font-extrabold text-navy opacity-0 delay-200 md:mb-5 md:whitespace-nowrap md:text-7xl">
+          <h1 className="animate-fade-in-up mb-6 text-6xl leading-tight font-extrabold text-navy opacity-0 delay-200 md:mb-5 md:text-7xl md:whitespace-nowrap">
             Hello, I'm Kelsey!
           </h1>
           <h2 className="animate-fade-in-up mb-12 text-[1.95rem] leading-snug font-semibold tracking-wide text-steel/90 opacity-0 delay-400 md:mb-10 md:text-[2.34rem]">
             Digital Product Designer & Developer
           </h2>
           <p className="animate-fade-in-up mb-14 text-lg font-bold tracking-wide text-coral opacity-0 delay-400 md:mb-12 md:text-xl">
-            I design and build digital experiences for surf, bike, climbing and adventure brands and folks because I'm a part of that community.
+            I design and build digital experiences for surf, bike, climbing and adventure communities.
           </p>
           <p className="animate-fade-in-up mb-16 max-w-md text-xl leading-loose text-steel/70 opacity-0 delay-600 md:mb-14 md:text-2xl">
             Based in the Midwest, I design and develop websites and digital products.
