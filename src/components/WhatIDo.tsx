@@ -1,3 +1,5 @@
+import ScrollReveal from '@/components/ScrollReveal';
+
 export default function WhatIDo() {
   const services = [
     {
@@ -19,32 +21,31 @@ export default function WhatIDo() {
   ];
 
   return (
-    <section id="what-i-do" className="border-t border-steel/5 bg-white px-6 pt-36 pb-32 md:pt-40 md:pb-36">
-      <div className="mx-auto max-w-6xl">
-        <h2 className="mb-14 text-center text-4xl font-bold text-navy md:text-5xl">
+    <section id="what-i-do" className="relative px-6 py-16 md:py-20">
+      <ScrollReveal className="mx-auto max-w-3xl">
+        <h2 className="mb-16 text-center text-[2.5rem] font-bold leading-tight text-navy md:mb-20 md:text-5xl lg:text-6xl">
           What I Do
         </h2>
-        <div className="grid gap-10 md:grid-cols-3">
-          {services.map(service => (
-            <div
-              key={service.title}
-              className="rounded-xl border-2 border-steel/10 bg-white p-8 shadow-[0_2px_12px_rgba(0,0,0,0.06)] transition duration-[250ms] ease-in-out hover:bg-cream/5 hover:shadow-[0_6px_20px_rgba(0,0,0,0.07)]"
-            >
-              <h3 className="mb-4 text-xl font-semibold text-navy md:text-2xl">
-                {service.title}
-              </h3>
-              <p className="leading-relaxed text-steel/90">
-                {service.description}
-              </p>
-              {service.startingAt && (
-                <p className="mt-4 text-sm font-medium text-navy">
-                  {service.startingAt}
+        <div className="space-y-0">
+          {services.map((service, idx) => (
+            <ScrollReveal key={service.title} staggerIndex={idx < 3 ? idx : undefined}>
+              <div className="border-b border-steel/15 py-12 last:border-0 last:pb-0 md:py-14">
+                <h3 className="mb-3 text-xl font-semibold text-navy md:text-2xl">
+                  {service.title}
+                </h3>
+                <p className="leading-relaxed text-steel">
+                  {service.description}
                 </p>
-              )}
-            </div>
+                {service.startingAt && (
+                  <p className="mt-3 text-sm font-medium text-navy">
+                    {service.startingAt}
+                  </p>
+                )}
+              </div>
+            </ScrollReveal>
           ))}
         </div>
-      </div>
+      </ScrollReveal>
     </section>
   );
 }

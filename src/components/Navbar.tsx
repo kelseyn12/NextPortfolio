@@ -6,7 +6,7 @@ export default function Navbar() {
   const [menuOpen, setMenuOpen] = useState(false);
 
   return (
-    <nav className="fixed top-0 left-0 z-50 w-full border-b border-navy/10 bg-white/90 shadow-sm backdrop-blur-md">
+    <nav className="fixed top-0 left-0 z-50 w-full border-b border-navy/10 bg-white/90 backdrop-blur-md">
       <div className="mx-auto flex max-w-6xl items-center justify-between px-6 py-6">
         {/* Logo / Name */}
         <a href="#hero" className="text-xl font-extrabold tracking-tight">
@@ -18,9 +18,14 @@ export default function Navbar() {
         {/* Desktop: Links + CTA */}
         <div className="hidden items-center gap-8 md:flex">
           <div className="flex gap-8 font-medium text-navy">
-            {['projects', 'personality', 'contact'].map(link => (
-              <a key={link} href={`#${link}`} className="group relative">
-                {link.charAt(0).toUpperCase() + link.slice(1)}
+            {[
+              { id: 'projects', label: 'Selected Work' },
+              { id: 'how-i-work', label: 'Process' },
+              { id: 'personality', label: 'Outside Work' },
+              { id: 'contact', label: 'Contact' },
+            ].map(({ id, label }) => (
+              <a key={id} href={`#${id}`} className="group relative">
+                {label}
                 <span className="absolute -bottom-1 left-0 h-0.5 w-0 bg-teal transition-all duration-300 group-hover:w-full" />
               </a>
             ))}
@@ -45,20 +50,25 @@ export default function Navbar() {
 
       {/* Floating Dropdown Menu */}
       <div
-        className={`absolute right-6 mt-2 flex w-40 transform flex-col items-start space-y-3 rounded-lg border border-navy/10 bg-white/95 p-4 shadow-lg backdrop-blur-md transition-all duration-300 ease-out md:hidden ${
+        className={`absolute right-6 mt-2 flex w-40 transform flex-col items-start space-y-3 rounded-lg border border-navy/10 bg-white/95 p-4 backdrop-blur-md transition-all duration-300 ease-out md:hidden ${
           menuOpen
             ? 'translate-y-0 opacity-100'
             : 'pointer-events-none -translate-y-2 opacity-0'
         }`}
       >
-        {['projects', 'personality', 'contact'].map(link => (
+        {[
+          { id: 'projects', label: 'Selected Work' },
+          { id: 'how-i-work', label: 'Process' },
+          { id: 'personality', label: 'Outside Work' },
+          { id: 'contact', label: 'Contact' },
+        ].map(({ id, label }) => (
           <a
-            key={link}
-            href={`#${link}`}
+            key={id}
+            href={`#${id}`}
             className="text-navy transition hover:text-teal"
             onClick={() => setMenuOpen(false)}
           >
-            {link.charAt(0).toUpperCase() + link.slice(1)}
+            {label}
           </a>
         ))}
         <Link

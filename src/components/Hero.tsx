@@ -1,53 +1,87 @@
-import Image from 'next/image';
+'use client';
+
+import { useEffect, useState } from 'react';
+
+/** Very slow parallax: background lags behind scroll — calm, like floating. */
+const PARALLAX_FACTOR = 0.08;
+const MAX_OFFSET_PX = 18;
+/** Overlay darkens slightly with scroll; capped so it stays subtle. */
+const OVERLAY_SCROLL_RANGE_PX = 500;
+const OVERLAY_MAX_OPACITY = 0.12;
 
 export default function Hero() {
+  const [parallax, setParallax] = useState({ offsetY: 0, overlayExtra: 0 });
+
+  useEffect(() => {
+    const handleScroll = () => {
+      if (typeof window === 'undefined') {
+        return;
+      }
+      const scrollY = window.scrollY;
+      if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+        // eslint-disable-next-line react-hooks-extra/no-direct-set-state-in-use-effect -- scroll parallax
+        setParallax({ offsetY: 0, overlayExtra: 0 });
+        return;
+      }
+      const offsetY = Math.min(scrollY * PARALLAX_FACTOR, MAX_OFFSET_PX);
+      const overlayExtra
+        = Math.min(scrollY / OVERLAY_SCROLL_RANGE_PX, 1) * OVERLAY_MAX_OPACITY;
+      // eslint-disable-next-line react-hooks-extra/no-direct-set-state-in-use-effect -- scroll parallax
+      setParallax({ offsetY, overlayExtra });
+    };
+    handleScroll();
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
   return (
     <section
       id="hero"
-      className="relative flex min-h-screen items-center bg-gradient-to-b from-cream/40 to-white px-6 py-28 md:py-40"
+      className="relative flex min-h-screen min-w-full items-center justify-center overflow-hidden"
     >
-      <div className="mx-auto grid max-w-6xl items-center gap-12 md:grid-cols-[3fr_2fr] md:gap-20">
-        {/* Left: Text */}
-        <div className="mx-auto max-w-lg text-center md:mx-0 md:text-left">
-          <h1 className="animate-fade-in-up mb-6 text-6xl leading-tight font-extrabold text-navy opacity-0 delay-200 md:mb-5 md:text-7xl md:whitespace-nowrap">
-            Hello, I'm Kelsey!
-          </h1>
-          <h2 className="animate-fade-in-up mb-12 text-[1.95rem] leading-snug font-semibold tracking-wide text-steel/90 opacity-0 delay-400 md:mb-10 md:text-[2.34rem]">
-            Digital Product Designer & Developer
-          </h2>
-          <p className="animate-fade-in-up mb-14 text-lg font-bold tracking-wide text-coral opacity-0 delay-400 md:mb-12 md:text-xl">
-            I design and build digital experiences for surf, bike, climbing and adventure communities.
-          </p>
-          <p className="animate-fade-in-up mb-16 max-w-md text-xl leading-loose text-steel/70 opacity-0 delay-600 md:mb-14 md:text-2xl">
-            Based in the Midwest, I design and develop websites and digital products.
-            I’ve always been drawn to building—from music to code—and I care about
-            things feeling thoughtful and functional.
-          </p>
-          <a
-            href="#projects"
-            className="animate-fade-in-up mt-2 inline-block transform rounded-xl border-2 border-teal px-10 py-4 font-semibold text-navy opacity-0 shadow-[0_2px_8px_rgba(0,0,0,0.06)] transition delay-200 duration-200 ease-in-out hover:-translate-y-0.5 hover:bg-teal/90 hover:text-cream md:mt-4"
-          >
-            Start a project
-          </a>
-        </div>
-
-        {/* Right: Photo */}
-        <div className="relative flex justify-center">
-          {/* Accent bars */}
-          <div className="absolute top-12 -left-6 hidden h-40 w-2 bg-peach/50 md:block"></div>
-          <div className="absolute top-20 -left-10 hidden h-48 w-2 bg-teal/50 md:block"></div>
-          <div className="absolute top-16 -left-14 hidden h-44 w-2 bg-coral/50 md:block"></div>
-          <div className="absolute top-24 -left-18 hidden h-52 w-2 bg-steel/50 md:block"></div>
-
-          <Image
-            src="/kelseyTwo.JPG"
-            alt="Kelsey Nocek"
-            width={420}
-            height={520}
-            priority
-            className="animate-fade-in-scale relative z-10 w-full max-w-sm rounded-xl object-cover opacity-0 shadow-[0_4px_20px_rgba(0,0,0,0.1)] delay-600 md:max-w-md"
-          />
-        </div>
+      {/* Full-width edge-to-edge image — very slow parallax */}
+      <div
+        className="absolute inset-0 z-0 bg-neutral-900 transition-transform duration-150 ease-out [@media(prefers-reduced-motion:reduce)]:!translate-y-0"
+        aria-hidden
+        style={{
+          backgroundImage: 'url(/hero-surf.png)',
+          backgroundSize: 'cover',
+          backgroundPosition: 'center',
+          transform: `translateY(${parallax.offsetY}px)`,
+        }}
+      />
+      {/* Soft dark-to-warm gradient overlay for readability */}
+      <div
+        className="absolute inset-0 z-[1] [@media(prefers-reduced-motion:reduce)]:!opacity-0"
+        aria-hidden
+        style={{
+          background:
+            'linear-gradient(to top, rgba(15,25,35,0.82) 0%, rgba(28,45,55,0.5) 35%, rgba(40,55,65,0.25) 65%, rgba(50,45,38,0.15) 100%)',
+        }}
+      />
+      {/* Slight extra darkening on scroll — calm, subtle */}
+      <div
+        className="absolute inset-0 z-[1] bg-[#0f1923] transition-opacity duration-200 ease-out [@media(prefers-reduced-motion:reduce)]:opacity-0"
+        aria-hidden
+        style={{ opacity: parallax.overlayExtra }}
+      />
+      {/* Headline and copy directly over the image */}
+      <div className="relative z-10 mx-auto max-w-4xl px-6 py-20 text-center">
+        <h1 className="animate-fade-in-up mb-5 text-5xl leading-tight font-extrabold text-white opacity-0 drop-shadow-[0_2px_20px_rgba(0,0,0,0.4)] delay-200 md:mb-6 md:text-6xl lg:text-7xl xl:text-8xl">
+          Hello, I&apos;m Kelsey!
+        </h1>
+        <p className="animate-fade-in-up mb-4 text-xl font-semibold tracking-wide text-white/95 opacity-0 delay-400 md:text-2xl">
+          Digital Product Designer & Developer
+        </p>
+        <p className="animate-fade-in-up mx-auto mb-10 max-w-2xl text-lg leading-relaxed text-white/90 opacity-0 delay-500 md:mb-12 md:text-xl">
+          I design and build digital experiences for surf, bike, climbing and adventure communities.
+        </p>
+        <a
+          href="#projects"
+          className="breezy-hover animate-fade-in-up inline-block rounded-2xl border border-white/60 bg-white/10 px-8 py-3.5 font-semibold text-white opacity-0 backdrop-blur-sm delay-300 hover:border-white/80 hover:bg-white/20 hover:text-white md:px-10 md:py-4"
+        >
+          Start a project
+        </a>
       </div>
     </section>
   );

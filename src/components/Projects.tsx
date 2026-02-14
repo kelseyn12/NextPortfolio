@@ -1,4 +1,62 @@
 import Image from 'next/image';
+import ScrollReveal from '@/components/ScrollReveal';
+
+const ACCENT_OVERLAYS = {
+  teal: 'bg-teal/90',
+  steel: 'bg-steel/90',
+  coral: 'bg-coral/90',
+  cream: 'bg-cream/90',
+  navy: 'bg-navy/90',
+} as const;
+
+type OverlayKey = keyof typeof ACCENT_OVERLAYS;
+
+function shortDescriptor(description: string, maxLength = 72) {
+  if (description.length <= maxLength) {
+    return description;
+  }
+  return `${description.slice(0, maxLength).trim()}…`;
+}
+
+function ProjectBlock({
+  project,
+  overlay,
+  featured = false,
+}: {
+  project: { title: string; description: string; image: string; link: string; tech: string[] };
+  overlay: string;
+  featured?: boolean;
+}) {
+  return (
+    <a
+      href={project.link}
+      target="_blank"
+      rel="noopener noreferrer"
+      className={`project-editorial group relative block w-full overflow-hidden rounded-sm ${featured ? 'aspect-[3/2] md:aspect-[16/9]' : 'aspect-[4/3] md:aspect-[6/5]'}`}
+    >
+      <Image
+        src={project.image}
+        alt={project.title}
+        fill
+        className="object-cover object-center transition-transform duration-400 ease-out group-hover:scale-[1.02]"
+        sizes={featured ? '100vw' : '(min-width:1024px) 33vw, (min-width:768px) 50vw, 100vw'}
+      />
+      <div
+        className={`absolute inset-0 flex flex-col items-center justify-center px-6 py-8 text-center opacity-0 transition-opacity duration-300 ease-out group-focus-within:opacity-100 group-hover:opacity-100 ${overlay}`}
+      >
+        <h3 className="mb-2 text-2xl font-bold text-white md:text-3xl">
+          {project.title}
+        </h3>
+        <p className="mb-6 max-w-md text-sm leading-relaxed text-white/95 md:text-base">
+          {shortDescriptor(project.description)}
+        </p>
+        <span className="rounded-lg border border-white/80 bg-white/10 px-5 py-2.5 text-sm font-medium text-white backdrop-blur-sm">
+          View case
+        </span>
+      </div>
+    </a>
+  );
+}
 
 export default function Projects() {
   const projects = [
@@ -67,69 +125,46 @@ export default function Projects() {
     },
   ];
 
-  // Rotate accents between teal, steel, coral
-  const accents = ['teal', 'steel', 'coral', 'cream', 'navy'];
+  const overlayKeys: OverlayKey[] = ['teal', 'steel', 'coral'];
+  const getOverlay = (i: number): string => {
+    const key: OverlayKey = overlayKeys[i % 3] ?? 'steel';
+    return ACCENT_OVERLAYS[key];
+  };
+
+  const visibleProjects = projects.slice(0, 4);
+  const featured = visibleProjects[0];
+  const rest = visibleProjects.slice(1);
+  if (!featured) {
+    return null;
+  }
 
   return (
-    <section id="projects" className="border-t border-steel/5 bg-white px-6 pt-32 pb-40 md:pt-36 md:pb-48">
-      <div className="mx-auto max-w-6xl text-center">
-        <h2 className="mb-12 text-4xl font-bold text-navy md:text-5xl">
-          Featured Projects
-        </h2>
+    <section id="projects" className="relative px-4 py-16 md:px-8 md:py-20">
+      <div className="mx-auto max-w-[90rem]">
+        <ScrollReveal className="text-center">
+          <h2 className="mb-10 text-[2.75rem] leading-tight font-bold text-navy md:mb-12 md:text-5xl lg:text-6xl">
+            Selected Work
+          </h2>
+        </ScrollReveal>
 
-        <div className="grid gap-10 md:grid-cols-2 lg:grid-cols-3">
-          {projects.map((project, idx) => {
-            const accent = accents[idx % accents.length]; // cycle through colors
-            return (
-              <div
-                key={project.title}
-                className={`group relative h-[26rem] w-full overflow-hidden rounded-xl border-2 shadow-[0_2px_12px_rgba(0,0,0,0.06)] transition duration-200 ease-in-out hover:-translate-y-1 hover:shadow-[0_10px_24px_rgba(0,0,0,0.08)]
-    ${accent === 'teal' ? 'border-teal bg-teal/5' : ''}
-    ${accent === 'steel' ? 'border-steel bg-steel/5' : ''}
-    ${accent === 'coral' ? 'border-coral bg-coral/5' : ''}
-    ${accent === 'cream' ? 'border-cream bg-cream/5' : ''}
-    ${accent === 'navy' ? 'border-navy bg-navy/5' : ''}`}
-              >
-                <Image
-                  src={project.image}
-                  alt={project.title}
-                  fill
-                  className="object-contain object-center p-2 transition duration-200 ease-in-out group-hover:opacity-90"
-                  sizes="(min-width:1024px) 33vw, (min-width:768px) 50vw, 100vw"
+        <div className="flex flex-col gap-12 md:gap-16">
+          <ScrollReveal className="w-full" staggerIndex={0}>
+            <ProjectBlock
+              project={featured}
+              overlay={getOverlay(0)}
+              featured
+            />
+          </ScrollReveal>
+          <div className="grid grid-cols-1 gap-12 md:grid-cols-2 md:gap-14 lg:grid-cols-3 lg:gap-12">
+            {rest.map((project, idx) => (
+              <ScrollReveal key={project.title} staggerIndex={idx < 5 ? idx + 1 : undefined}>
+                <ProjectBlock
+                  project={project}
+                  overlay={getOverlay(idx + 1)}
                 />
-
-                {/* Overlay */}
-                <div
-                  className={`absolute inset-0 flex flex-col items-center justify-start overflow-y-auto px-5 py-6 text-center opacity-0 transition duration-200 ease-in-out group-hover:opacity-100 ${accent === 'teal' ? 'bg-teal/90' : ''} ${accent === 'steel' ? 'bg-steel/90' : ''} ${accent === 'coral' ? 'bg-coral/90' : ''} ${accent === 'cream' ? 'bg-cream/90' : ''} ${accent === 'navy' ? 'bg-navy/90' : ''} `}
-                >
-                  <h3 className="mb-2 text-2xl font-bold text-white">
-                    {project.title}
-                  </h3>
-                  <p className="mb-4 text-white">
-                    {project.description}
-                  </p>
-                  <div className="mb-4 flex flex-wrap justify-center gap-2">
-                    {project.tech.map(tech => (
-                      <span
-                        key={tech}
-                        className="rounded-full border border-white/40 px-3 py-1 text-sm text-white/90"
-                      >
-                        {tech}
-                      </span>
-                    ))}
-                  </div>
-                  <a
-                    href={project.link}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="mt-4 inline-block rounded-xl border-2 border-white px-5 py-2 font-medium text-white transition duration-200 ease-in-out hover:bg-white hover:text-navy"
-                  >
-                    View Project
-                  </a>
-                </div>
-              </div>
-            );
-          })}
+              </ScrollReveal>
+            ))}
+          </div>
         </div>
       </div>
     </section>

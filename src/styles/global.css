@@ -28,12 +28,13 @@ html {
 @theme {
   --font-sans: 'Inter', ui-sans-serif, system-ui, sans-serif;
 
-  --color-cream: #f4d2b3; /*peach background*/
-  --color-teal: #64c7d1; /*primary accent*/
-  --color-coral: #e59190; /* rose/pink accent */
-  --color-steel: #668ea5; /*blue/gray body text */
-  --color-navy: #1a3b58; /*headline/primary text */
-  --color-peach: #f4d2b3; /*light peach background */
+  /* Readability: dark navy headings, clear slate body, coral for key accents only */
+  --color-navy: #1a2e38; /* dark navy — main headings */
+  --color-steel: #3f4d56; /* slate — paragraphs (not faded) */
+  --color-teal: #4a6b73; /* muted teal (links, secondary) */
+  --color-coral: #b85c38; /* coral accent — key phrases / CTAs only */
+  --color-cream: #e8dcc8; /* warm sand / faded beige */
+  --color-peach: #d4c4a8; /* warmer sand */
 }
 
 @layer utilities {
@@ -79,5 +80,236 @@ html {
   }
   .delay-1000 {
     animation-delay: 1000ms;
+  }
+
+  /* Scroll-triggered reveal: fade-up as sections enter viewport — subtle, calm, continuous */
+  .scroll-reveal {
+    opacity: 0;
+    transform: translateY(14px);
+    transition:
+      opacity 0.8s ease-out,
+      transform 0.8s ease-out;
+  }
+
+  .scroll-reveal.scroll-reveal-visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* Stagger delays for child elements */
+  .scroll-reveal-stagger-1 { transition-delay: 80ms; }
+  .scroll-reveal-stagger-2 { transition-delay: 160ms; }
+  .scroll-reveal-stagger-3 { transition-delay: 240ms; }
+  .scroll-reveal-stagger-4 { transition-delay: 320ms; }
+  .scroll-reveal-stagger-5 { transition-delay: 400ms; }
+
+  /* Same as scroll-reveal for motion consistency */
+  .scroll-reveal-scale {
+    opacity: 0;
+    transform: translateY(14px);
+    transition:
+      opacity 0.8s ease-out,
+      transform 0.8s ease-out;
+  }
+
+  .scroll-reveal-scale.scroll-reveal-visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* Floating surface: frosted glass panel on unified background */
+  .floating-surface {
+    background: rgba(255, 255, 255, 0.72);
+    backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.5);
+    border-radius: 1rem;
+    box-shadow: 0 4px 32px rgba(0, 0, 0, 0.04), 0 1px 16px rgba(0, 0, 0, 0.02);
+  }
+  @supports not (backdrop-filter: blur(12px)) {
+    .floating-surface {
+      background: rgba(255, 255, 255, 0.88);
+    }
+  }
+  .floating-surface-dark {
+    background: rgba(31, 58, 68, 0.92);
+    backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 1rem;
+    box-shadow: 0 4px 32px rgba(0, 0, 0, 0.12), 0 1px 16px rgba(0, 0, 0, 0.06);
+  }
+
+  /* Selected Work: immersive editorial — subtle hover zoom (1.02), light lift */
+  .project-editorial {
+    box-shadow: none;
+    transition: transform 400ms ease, box-shadow 400ms ease;
+  }
+  .project-editorial:hover,
+  .project-editorial:focus-within {
+    transform: translateY(-4px) scale(1.02);
+    box-shadow: 0 16px 32px rgba(0, 0, 0, 0.06), 0 6px 12px rgba(0, 0, 0, 0.03);
+  }
+
+  /* Breezy hover: very soft lift (2–4px), micro not macro */
+  .breezy-hover {
+    transition:
+      transform 0.4s ease-out,
+      box-shadow 0.4s ease-out,
+      border-color 0.3s ease-out,
+      background-color 0.3s ease-out;
+  }
+  .breezy-hover:hover,
+  .breezy-hover:focus-within {
+    transform: translateY(-3px) scale(1.008);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.05), 0 2px 8px rgba(0, 0, 0, 0.02);
+  }
+
+  /* Subtle gradient shift (water/light) — 40s loop */
+  @keyframes gradient-shift {
+    0%, 100% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+  }
+  .animate-gradient-shift {
+    background-size: 200% 200%;
+    animation: gradient-shift 40s ease-in-out infinite;
+  }
+
+  /* Hero: very slow atmospheric drift — 25s, nearly imperceptible */
+  @keyframes hero-gradient-drift {
+    0%, 100% { background-position: 50% 50%; }
+    50% { background-position: 52% 48%; }
+  }
+  .animate-hero-gradient-drift {
+    background-size: 280% 280%;
+    animation: hero-gradient-drift 25s ease-in-out infinite;
+  }
+
+  /* Statement section: slow zoom — breathing, not animation (20s, 1 → 1.03) */
+  @keyframes statement-breath {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.03); }
+  }
+  .animate-statement-breath {
+    animation: statement-breath 20s ease-in-out infinite;
+  }
+
+  /* Respect prefers-reduced-motion: instant reveal, no continuous animation */
+  @media (prefers-reduced-motion: reduce) {
+    .scroll-reveal,
+    .scroll-reveal-scale {
+      transition: none;
+    }
+    .scroll-reveal-stagger-1,
+    .scroll-reveal-stagger-2,
+    .scroll-reveal-stagger-3,
+    .scroll-reveal-stagger-4,
+    .scroll-reveal-stagger-5 {
+      transition-delay: 0ms;
+    }
+    .animate-gradient-shift,
+    .animate-hero-gradient-drift,
+    .animate-statement-breath,
+    .animate-wave-bg,
+    .animate-wave-drift,
+    .animate-wave-drift-slow,
+    .animate-wave-drift-fast,
+    .animate-wave-drift-slower,
+    .animate-wave-drift-slowest,
+    .animate-wave-drift-deep,
+    .animate-wave-drift-deep-slow,
+    .animate-statement-wave-a,
+    .animate-statement-wave-b,
+    .animate-statement-wave-c,
+    .animate-statement-line {
+      animation: none;
+    }
+    .project-editorial:hover,
+    .project-editorial:focus-within,
+    .breezy-hover:hover,
+    .breezy-hover:focus-within {
+      transform: translateY(-2px) scale(1);
+    }
+    .project-editorial:hover,
+    .project-editorial:focus-within {
+      box-shadow: none;
+    }
+  }
+
+  /* Scrolling banner: slow, seamless right-to-left */
+  @keyframes marquee {
+    0% {
+      transform: translateX(0);
+    }
+    100% {
+      transform: translateX(-50%);
+    }
+  }
+
+  .animate-marquee {
+    animation: marquee 55s linear infinite;
+  }
+
+  /* Background wave: very large tile, very slow drift — atmospheric, mist-on-water */
+  @keyframes wave-bg-drift {
+    0% {
+      background-position: 0 0;
+    }
+    100% {
+      background-position: -2000px 0;
+    }
+  }
+  .animate-wave-bg {
+    background-size: 2000px 800px;
+    animation: wave-bg-drift 72s linear infinite;
+  }
+
+  /* Statement section: track is 200% wide; move by 50% = one tile for seamless loop */
+  @keyframes wave-drift {
+    0% {
+      transform: translateX(0);
+    }
+    100% {
+      transform: translateX(-50%);
+    }
+  }
+
+  .animate-wave-drift {
+    animation: wave-drift 30s linear infinite;
+  }
+  .animate-wave-drift-slow {
+    animation: wave-drift 38s linear infinite;
+  }
+  .animate-wave-drift-fast {
+    animation: wave-drift 26s linear infinite;
+  }
+  .animate-wave-drift-slower {
+    animation: wave-drift 48s linear infinite;
+  }
+  .animate-wave-drift-slowest {
+    animation: wave-drift 58s linear infinite;
+  }
+  /* Deep water: very slow wave (72s / 90s) */
+  .animate-wave-drift-deep {
+    animation: wave-drift 72s linear infinite;
+  }
+  .animate-wave-drift-deep-slow {
+    animation: wave-drift 90s linear infinite;
+  }
+
+  /* Statement section: 3 wave layers + line — parallax speeds (very subtle) */
+  .animate-statement-wave-a {
+    animation: wave-drift 50s linear infinite;
+  }
+  .animate-statement-wave-b {
+    animation: wave-drift 78s linear infinite;
+  }
+  .animate-statement-wave-c {
+    animation: wave-drift 110s linear infinite;
+  }
+  .animate-statement-line {
+    animation: wave-drift 42s linear infinite;
+  }
+
+  .content-block-elevation {
+    box-shadow: 0 2px 16px rgba(0, 0, 0, 0.04), 0 1px 4px rgba(0, 0, 0, 0.02);
   }
 }

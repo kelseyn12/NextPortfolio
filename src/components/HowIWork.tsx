@@ -1,3 +1,5 @@
+import ScrollReveal from '@/components/ScrollReveal';
+
 export default function HowIWork() {
   const steps = [
     { number: 1, title: 'We talk', text: 'Quick call or email to understand what you need and whether we’re a good fit.' },
@@ -8,30 +10,38 @@ export default function HowIWork() {
   ];
 
   return (
-    <section id="how-i-work" className="border-t border-steel/5 bg-white px-6 pt-32 pb-40 md:pt-36 md:pb-48">
-      <div className="mx-auto max-w-6xl">
-        <h2 className="mb-14 text-center text-4xl font-bold text-navy md:text-5xl">
-          How I Work
+    <section id="how-i-work" className="relative isolate overflow-hidden px-6 py-20 md:py-24">
+      {/* Soft radial gradient — slightly lighter center, no hard edges */}
+      <div
+        className="pointer-events-none absolute inset-0 -inset-x-[15%] -inset-y-12 md:-inset-y-16"
+        aria-hidden
+        style={{
+          background:
+            'radial-gradient(ellipse 85% 75% at 50% 50%, rgba(242,237,228,0.85) 0%, rgba(232,224,212,0.4) 55%, transparent 100%)',
+        }}
+      />
+      <ScrollReveal className="relative z-10 mx-auto max-w-3xl">
+        <h2 className="mb-16 text-left text-[2.5rem] font-bold leading-tight text-navy md:mb-20 md:text-5xl lg:text-6xl">
+          Process
         </h2>
-        <div className="mx-auto max-w-2xl space-y-8">
-          {steps.map(step => (
-            <div
-              key={step.number}
-              className="flex gap-6 rounded-2xl bg-cream/10 p-8 shadow-[0_1px_10px_rgba(0,0,0,0.04)] transition duration-300 ease-in-out hover:shadow-[0_2px_14px_rgba(0,0,0,0.06)]"
-            >
-              <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-cream text-lg font-bold text-navy">
-                {step.number}
-              </span>
-              <div>
-                <h3 className="mb-2 text-lg font-semibold text-navy">
-                  {step.title}
-                </h3>
-                <p className="leading-loose text-steel/90">{step.text}</p>
+        <div className="space-y-0">
+          {steps.map((step, idx) => (
+            <ScrollReveal key={step.number} staggerIndex={idx < 5 ? idx : undefined}>
+              <div className="flex gap-5 border-b border-steel/12 py-12 last:border-0 last:pb-0 md:gap-6 md:py-14">
+                <span className="flex h-8 w-8 shrink-0 items-center justify-center text-base font-semibold text-steel">
+                  {step.number}
+                </span>
+                <div>
+                  <h3 className="mb-2 text-lg font-semibold text-navy">
+                    {step.title}
+                  </h3>
+                  <p className="max-w-2xl leading-relaxed text-steel">{step.text}</p>
+                </div>
               </div>
-            </div>
+            </ScrollReveal>
           ))}
         </div>
-      </div>
+      </ScrollReveal>
     </section>
   );
 }

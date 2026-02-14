@@ -1,5 +1,6 @@
 import type { Metadata } from 'next';
 import Navbar from '@/components/Navbar';
+import PageLayers from '@/components/PageLayers';
 import '../styles/global.css';
 
 export const metadata: Metadata = {
@@ -20,8 +21,9 @@ export default function RootLayout({
   return (
     <html lang="en" className="scroll-smooth">
       <body className="font-sans">
+        <PageLayers />
         <Navbar />
-        <main className="pt-20">{children}</main>
+        <main className="relative z-10 pt-20">{children}</main>
       </body>
     </html>
   );

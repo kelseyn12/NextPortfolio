@@ -4,9 +4,6 @@
   "engines": {
     "node": "20.x || 22.x"
   },
-  "overrides": {
-    "eslint-plugin-react-refresh": "0.4.20"
-  },
   "scripts": {
     "dev:spotlight": "npx @spotlightjs/spotlight",
     "dev:next": "next dev --turbopack",
@@ -105,6 +102,9 @@
     "vite-tsconfig-paths": "^5.1.4",
     "vitest": "^3.2.4",
     "vitest-browser-react": "^1.0.1"
+  },
+  "overrides": {
+    "eslint-plugin-react-refresh": "0.4.20"
   },
   "release": {
     "branches": [
