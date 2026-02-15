@@ -138,15 +138,19 @@ html {
     box-shadow: 0 4px 32px rgba(0, 0, 0, 0.12), 0 1px 16px rgba(0, 0, 0, 0.06);
   }
 
-  /* Selected Work: immersive editorial — subtle hover zoom (1.02), light lift */
+  /* Selected Work: immersive editorial — hover scale 1.02–1.04, light lift */
   .project-editorial {
     box-shadow: none;
     transition: transform 400ms ease, box-shadow 400ms ease;
   }
   .project-editorial:hover,
   .project-editorial:focus-within {
-    transform: translateY(-4px) scale(1.02);
+    transform: translateY(-4px) scale(1.03);
     box-shadow: 0 16px 32px rgba(0, 0, 0, 0.06), 0 6px 12px rgba(0, 0, 0, 0.03);
+  }
+  .project-editorial[data-featured]:hover,
+  .project-editorial[data-featured]:focus-within {
+    transform: translateY(-4px) scale(1.04);
   }
 
   /* Breezy hover: very soft lift (2–4px), micro not macro */
@@ -183,6 +187,15 @@ html {
     animation: hero-gradient-drift 25s ease-in-out infinite;
   }
 
+  /* Hero: very subtle slow zoom (1 → 1.02 over 20s) */
+  @keyframes hero-zoom {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.02); }
+  }
+  .animate-hero-zoom {
+    animation: hero-zoom 20s ease-in-out infinite;
+  }
+
   /* Statement section: slow zoom — breathing, not animation (20s, 1 → 1.03) */
   @keyframes statement-breath {
     0%, 100% { transform: scale(1); }
@@ -207,6 +220,7 @@ html {
     }
     .animate-gradient-shift,
     .animate-hero-gradient-drift,
+    .animate-hero-zoom,
     .animate-statement-breath,
     .animate-wave-bg,
     .animate-wave-drift,
@@ -224,13 +238,20 @@ html {
     }
     .project-editorial:hover,
     .project-editorial:focus-within,
+    .project-editorial[data-featured]:hover,
+    .project-editorial[data-featured]:focus-within,
     .breezy-hover:hover,
     .breezy-hover:focus-within {
       transform: translateY(-2px) scale(1);
     }
     .project-editorial:hover,
-    .project-editorial:focus-within {
+    .project-editorial:focus-within,
+    .project-editorial[data-featured]:hover,
+    .project-editorial[data-featured]:focus-within {
       box-shadow: none;
+    }
+    .outside-work-tile img {
+      transform: none;
     }
   }
 
@@ -248,18 +269,18 @@ html {
     animation: marquee 55s linear infinite;
   }
 
-  /* Background wave: very large tile, very slow drift — atmospheric, mist-on-water */
+  /* Background wave: very large tile, very slow drift — atmospheric, not patterned */
   @keyframes wave-bg-drift {
     0% {
       background-position: 0 0;
     }
     100% {
-      background-position: -2000px 0;
+      background-position: -2800px 0;
     }
   }
   .animate-wave-bg {
-    background-size: 2000px 800px;
-    animation: wave-bg-drift 72s linear infinite;
+    background-size: 2800px 1000px;
+    animation: wave-bg-drift 96s linear infinite;
   }
 
   /* Statement section: track is 200% wide; move by 50% = one tile for seamless loop */

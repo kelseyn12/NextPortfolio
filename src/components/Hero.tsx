@@ -39,15 +39,29 @@ export default function Hero() {
       id="hero"
       className="relative flex min-h-screen min-w-full items-center justify-center overflow-hidden"
     >
-      {/* Full-width edge-to-edge image — very slow parallax */}
+      {/* Full-width edge-to-edge image — parallax + subtle slow zoom (1.02 over 20s) */}
       <div
         className="absolute inset-0 z-0 bg-neutral-900 transition-transform duration-150 ease-out [@media(prefers-reduced-motion:reduce)]:!translate-y-0"
         aria-hidden
+        style={{ transform: `translateY(${parallax.offsetY}px)` }}
+      >
+        <div
+          className="animate-hero-zoom absolute inset-0 bg-cover bg-center bg-no-repeat [@media(prefers-reduced-motion:reduce)]:!scale-100 [@media(prefers-reduced-motion:reduce)]:animate-none"
+          aria-hidden
+          style={{
+            backgroundImage: 'url(/hero-surf.png)',
+            backgroundSize: 'cover',
+            backgroundPosition: 'center',
+          }}
+        />
+      </div>
+      {/* Soft top vignette — text clarity */}
+      <div
+        className="pointer-events-none absolute inset-0 z-[1] [@media(prefers-reduced-motion:reduce)]:!opacity-0"
+        aria-hidden
         style={{
-          backgroundImage: 'url(/hero-surf.png)',
-          backgroundSize: 'cover',
-          backgroundPosition: 'center',
-          transform: `translateY(${parallax.offsetY}px)`,
+          background:
+            'linear-gradient(to bottom, rgba(0,0,0,0.4) 0%, rgba(0,0,0,0.12) 35%, transparent 70%)',
         }}
       />
       {/* Soft dark-to-warm gradient overlay for readability */}
@@ -65,9 +79,18 @@ export default function Hero() {
         aria-hidden
         style={{ opacity: parallax.overlayExtra }}
       />
+      {/* Soft fade into beige — no hard line between hero and next section */}
+      <div
+        className="pointer-events-none absolute right-0 bottom-0 left-0 z-[1] h-[28vh] min-h-[180px] [@media(prefers-reduced-motion:reduce)]:opacity-100"
+        aria-hidden
+        style={{
+          background:
+            'linear-gradient(to bottom, transparent 0%, rgba(232,224,212,0.4) 40%, rgb(232,224,212) 100%)',
+        }}
+      />
       {/* Headline and copy directly over the image */}
       <div className="relative z-10 mx-auto max-w-4xl px-6 py-20 text-center">
-        <h1 className="animate-fade-in-up mb-5 text-5xl leading-tight font-extrabold text-white opacity-0 drop-shadow-[0_2px_20px_rgba(0,0,0,0.4)] delay-200 md:mb-6 md:text-6xl lg:text-7xl xl:text-8xl">
+        <h1 className="animate-fade-in-up mb-5 text-6xl leading-tight font-extrabold text-white opacity-0 drop-shadow-[0_2px_20px_rgba(0,0,0,0.4)] delay-200 md:mb-6 md:text-7xl lg:text-8xl xl:text-9xl">
           Hello, I&apos;m Kelsey!
         </h1>
         <p className="animate-fade-in-up mb-4 text-xl font-semibold tracking-wide text-white/95 opacity-0 delay-400 md:text-2xl">

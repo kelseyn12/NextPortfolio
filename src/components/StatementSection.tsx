@@ -71,8 +71,8 @@ export default function StatementSection() {
                 className="h-full w-full"
               >
                 <g fill="none" stroke="rgba(255,255,255,0.7)" strokeWidth="0.9" strokeLinecap="round">
-                  {waveStrokes.map((pathD, i) => (
-                    <g key={`wave-stroke-${i}`}>
+                  {waveStrokes.map(pathD => (
+                    <g key={pathD}>
                       <path d={pathD} />
                       <path d={pathD} transform={`translate(${WAVE_VIEWBOX_WIDTH}, 0)`} />
                     </g>
@@ -86,8 +86,8 @@ export default function StatementSection() {
 
       {/* Text: slightly below center, more vertical padding */}
       <ScrollReveal className="relative z-10 flex min-h-screen w-full flex-col items-center justify-center px-6 pt-[10vh] pb-[12vh] text-center">
-        <p className="max-w-5xl text-5xl font-bold leading-[1.12] tracking-tight text-white drop-shadow-[0_2px_20px_rgba(0,0,0,0.35)] md:text-7xl lg:text-8xl xl:text-9xl 2xl:text-[10rem]">
-        Good design should feel like flow.
+        <p className="max-w-5xl text-5xl leading-[1.12] font-bold tracking-tight text-white drop-shadow-[0_2px_20px_rgba(0,0,0,0.35)] md:text-7xl lg:text-8xl xl:text-9xl 2xl:text-[10rem]">
+          Good design should feel like flow.
         </p>
       </ScrollReveal>
     </section>

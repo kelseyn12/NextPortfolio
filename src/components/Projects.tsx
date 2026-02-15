@@ -1,4 +1,7 @@
+'use client';
+
 import Image from 'next/image';
+import { useEffect, useState } from 'react';
 import ScrollReveal from '@/components/ScrollReveal';
 
 const ACCENT_OVERLAYS = {
@@ -18,33 +21,67 @@ function shortDescriptor(description: string, maxLength = 72) {
   return `${description.slice(0, maxLength).trim()}…`;
 }
 
+const FEATURED_PARALLAX_FACTOR = 0.12;
+const FEATURED_PARALLAX_MAX_PX = 24;
+
 function ProjectBlock({
   project,
   overlay,
   featured = false,
+  parallaxY = 0,
 }: {
   project: { title: string; description: string; image: string; link: string; tech: string[] };
   overlay: string;
   featured?: boolean;
+  parallaxY?: number;
 }) {
   return (
     <a
       href={project.link}
       target="_blank"
       rel="noopener noreferrer"
-      className={`project-editorial group relative block w-full overflow-hidden rounded-sm ${featured ? 'aspect-[3/2] md:aspect-[16/9]' : 'aspect-[4/3] md:aspect-[6/5]'}`}
+      className={`project-editorial group relative block w-full overflow-hidden rounded-none ${featured ? 'aspect-[4/3] md:aspect-[5/4]' : 'aspect-[4/3] md:aspect-[6/5]'}`}
+      data-featured={featured ? 'true' : undefined}
     >
-      <Image
-        src={project.image}
-        alt={project.title}
-        fill
-        className="object-cover object-center transition-transform duration-400 ease-out group-hover:scale-[1.02]"
-        sizes={featured ? '100vw' : '(min-width:1024px) 33vw, (min-width:768px) 50vw, 100vw'}
-      />
+      {featured
+        ? (
+            <div
+              className="absolute inset-0 transition-transform duration-150 ease-out [@media(prefers-reduced-motion:reduce)]:!translate-y-0"
+              style={{ transform: `translateY(${parallaxY}px)` }}
+            >
+              <Image
+                src={project.image}
+                alt={project.title}
+                fill
+                className="object-cover object-center transition-transform duration-400 ease-out group-hover:scale-[1.04]"
+                sizes="100vw"
+              />
+            </div>
+          )
+        : (
+            <Image
+              src={project.image}
+              alt={project.title}
+              fill
+              className="object-cover object-center transition-transform duration-400 ease-out group-hover:scale-[1.02]"
+              sizes="(min-width:1024px) 33vw, (min-width:768px) 50vw, 100vw"
+            />
+          )}
+      {/* Dark gradient overlay for text readability (featured) */}
+      {featured && (
+        <div
+          className="pointer-events-none absolute inset-0 z-[1] [@media(prefers-reduced-motion:reduce)]:opacity-0"
+          aria-hidden
+          style={{
+            background:
+              'linear-gradient(to top, rgba(0,0,0,0.5) 0%, rgba(0,0,0,0.15) 45%, transparent 100%)',
+          }}
+        />
+      )}
       <div
-        className={`absolute inset-0 flex flex-col items-center justify-center px-6 py-8 text-center opacity-0 transition-opacity duration-300 ease-out group-focus-within:opacity-100 group-hover:opacity-100 ${overlay}`}
+        className={`absolute inset-0 z-[2] flex flex-col items-center justify-center px-6 py-8 text-center opacity-0 transition-opacity duration-300 ease-out group-focus-within:opacity-100 group-hover:opacity-100 ${overlay}`}
       >
-        <h3 className="mb-2 text-2xl font-bold text-white md:text-3xl">
+        <h3 className={`mb-2 font-bold text-white ${featured ? 'text-3xl md:text-4xl lg:text-5xl' : 'text-2xl md:text-3xl'}`}>
           {project.title}
         </h3>
         <p className="mb-6 max-w-md text-sm leading-relaxed text-white/95 md:text-base">
@@ -134,37 +171,59 @@ export default function Projects() {
   const visibleProjects = projects.slice(0, 4);
   const featured = visibleProjects[0];
   const rest = visibleProjects.slice(1);
+  const [featuredParallaxY, setFeaturedParallaxY] = useState(0);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      if (typeof window === 'undefined' || window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+        // eslint-disable-next-line react-hooks-extra/no-direct-set-state-in-use-effect -- scroll parallax
+        setFeaturedParallaxY(0);
+        return;
+      }
+      const scrollY = window.scrollY;
+      const offset = Math.min(scrollY * FEATURED_PARALLAX_FACTOR, FEATURED_PARALLAX_MAX_PX);
+      // eslint-disable-next-line react-hooks-extra/no-direct-set-state-in-use-effect -- scroll parallax
+      setFeaturedParallaxY(offset);
+    };
+    handleScroll();
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
   if (!featured) {
     return null;
   }
 
   return (
-    <section id="projects" className="relative px-4 py-16 md:px-8 md:py-20">
-      <div className="mx-auto max-w-[90rem]">
+    <section id="projects" className="relative py-16 md:py-20">
+      <div className="mx-auto max-w-[90rem] px-4 md:px-8">
         <ScrollReveal className="text-center">
-          <h2 className="mb-10 text-[2.75rem] leading-tight font-bold text-navy md:mb-12 md:text-5xl lg:text-6xl">
+          <h2 className="mb-6 text-[2.75rem] leading-tight font-bold text-navy md:mb-8 md:text-5xl lg:text-6xl">
             Selected Work
           </h2>
         </ScrollReveal>
+      </div>
 
-        <div className="flex flex-col gap-12 md:gap-16">
-          <ScrollReveal className="w-full" staggerIndex={0}>
-            <ProjectBlock
-              project={featured}
-              overlay={getOverlay(0)}
-              featured
-            />
-          </ScrollReveal>
-          <div className="grid grid-cols-1 gap-12 md:grid-cols-2 md:gap-14 lg:grid-cols-3 lg:gap-12">
-            {rest.map((project, idx) => (
-              <ScrollReveal key={project.title} staggerIndex={idx < 5 ? idx + 1 : undefined}>
-                <ProjectBlock
-                  project={project}
-                  overlay={getOverlay(idx + 1)}
-                />
-              </ScrollReveal>
-            ))}
-          </div>
+      {/* First project: full-bleed edge-to-edge, no side padding */}
+      <ScrollReveal className="w-full" staggerIndex={0}>
+        <ProjectBlock
+          project={featured}
+          overlay={getOverlay(0)}
+          featured
+          parallaxY={featuredParallaxY}
+        />
+      </ScrollReveal>
+
+      <div className="mx-auto max-w-[90rem] px-4 md:px-8">
+        <div className="grid grid-cols-1 gap-12 pt-12 md:gap-14 md:pt-16 lg:grid-cols-3 lg:gap-12">
+          {rest.map((project, idx) => (
+            <ScrollReveal key={project.title} staggerIndex={idx < 5 ? idx + 1 : undefined}>
+              <ProjectBlock
+                project={project}
+                overlay={getOverlay(idx + 1)}
+              />
+            </ScrollReveal>
+          ))}
         </div>
       </div>
     </section>

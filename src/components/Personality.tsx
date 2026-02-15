@@ -1,67 +1,28 @@
+import Image from 'next/image';
 import ScrollReveal from '@/components/ScrollReveal';
 
-const ACTIVITIES: { label: string; icon: 'music' | 'bike' | 'wave' | 'climb' }[] = [
-  { label: 'Playing music', icon: 'music' },
-  { label: 'Bike-Boppin about', icon: 'bike' },
-  { label: 'Surfing', icon: 'wave' },
-  { label: 'Climbing rocks', icon: 'climb' },
+const ACTIVITIES: { label: string; image: string; alt: string }[] = [
+  {
+    label: 'Playing music',
+    image: 'https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?w=400&h=400&fit=crop',
+    alt: 'Guitar and music',
+  },
+  {
+    label: 'Bike-Boppin about',
+    image: 'https://images.unsplash.com/photo-1541625602330-2277a4c46182?w=400&h=400&fit=crop',
+    alt: 'Cycling',
+  },
+  {
+    label: 'Surfing',
+    image: 'https://images.unsplash.com/photo-1502680390469-be75c86b636f?w=400&h=400&fit=crop',
+    alt: 'Surfing',
+  },
+  {
+    label: 'Climbing rocks',
+    image: 'https://images.unsplash.com/photo-1522163182402-834f871fd851?w=400&h=400&fit=crop',
+    alt: 'Rock climbing',
+  },
 ];
-
-const ICON_CLASS = 'mb-5 size-7 text-steel';
-const STROKE = 1.5;
-const STROKE_STYLE = { stroke: 'currentColor', strokeWidth: STROKE, strokeLinecap: 'round' as const, strokeLinejoin: 'round' as const, fill: 'none' };
-
-/** Minimal music note (Lucide-style outline) */
-function IconMusic() {
-  return (
-    <svg viewBox="0 0 24 24" className={ICON_CLASS} aria-hidden>
-      <path d="M9 18V5l12-2v13" {...STROKE_STYLE} />
-      <circle cx="6" cy="18" r="3" {...STROKE_STYLE} />
-      <circle cx="18" cy="16" r="3" {...STROKE_STYLE} />
-    </svg>
-  );
-}
-
-/** Simple bicycle outline */
-function IconBike() {
-  return (
-    <svg viewBox="0 0 24 24" className={ICON_CLASS} aria-hidden>
-      <circle cx="5.5" cy="17.5" r="3.5" {...STROKE_STYLE} />
-      <circle cx="18.5" cy="17.5" r="3.5" {...STROKE_STYLE} />
-      <path d="M12 17.5V14l3-4 4 1.5" {...STROKE_STYLE} />
-      <path d="M12 14H9l-3.5 3.5" {...STROKE_STYLE} />
-      <path d="M15 10l-1.5-4h-4" {...STROKE_STYLE} />
-    </svg>
-  );
-}
-
-/** Simple wave outline */
-function IconWave() {
-  return (
-    <svg viewBox="0 0 24 24" className={ICON_CLASS} aria-hidden>
-      <path d="M2 12c2-2 4-2 6 0s4 2 6 0 4-2 6 0" {...STROKE_STYLE} />
-      <path d="M2 16c2-2 4-2 6 0s4 2 6 0 4-2 6 0" {...STROKE_STYLE} />
-    </svg>
-  );
-}
-
-/** Minimal mountain outline (climbing rocks) */
-function IconClimb() {
-  return (
-    <svg viewBox="0 0 24 24" className={ICON_CLASS} aria-hidden>
-      <path d="M2 20l6-10 4 4 4-8 6 14" {...STROKE_STYLE} />
-    </svg>
-  );
-}
-
-function ActivityIcon({ type }: { type: 'music' | 'bike' | 'wave' | 'climb' }) {
-  switch (type) {
-    case 'music': return <IconMusic />;
-    case 'bike': return <IconBike />;
-    case 'wave': return <IconWave />;
-    case 'climb': return <IconClimb />;
-  }
-}
 
 export default function Personality() {
   return (
@@ -71,11 +32,19 @@ export default function Personality() {
           Outside Work
         </h2>
 
-        <div className="grid gap-8 sm:grid-cols-2 md:grid-cols-4">
-          {ACTIVITIES.map(({ label, icon }, idx) => (
+        <div className="grid gap-10 sm:grid-cols-2 md:grid-cols-4">
+          {ACTIVITIES.map(({ label, image, alt }, idx) => (
             <ScrollReveal key={label} staggerIndex={idx}>
-              <div className="flex flex-col items-center rounded-xl p-6 transition-colors duration-300 hover:bg-white/30">
-                <ActivityIcon type={icon} />
+              <div className="outside-work-tile group flex flex-col items-center">
+                <div className="relative mb-4 aspect-square w-full max-w-[200px] overflow-hidden rounded-full md:max-w-[220px]">
+                  <Image
+                    src={image}
+                    alt={alt}
+                    width={400}
+                    height={400}
+                    className="object-cover object-center transition-transform duration-300 ease-out group-hover:-translate-y-1"
+                  />
+                </div>
                 <p className="text-lg font-medium text-navy">{label}</p>
               </div>
             </ScrollReveal>
