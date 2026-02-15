@@ -97,11 +97,21 @@ html {
   }
 
   /* Stagger delays for child elements */
-  .scroll-reveal-stagger-1 { transition-delay: 80ms; }
-  .scroll-reveal-stagger-2 { transition-delay: 160ms; }
-  .scroll-reveal-stagger-3 { transition-delay: 240ms; }
-  .scroll-reveal-stagger-4 { transition-delay: 320ms; }
-  .scroll-reveal-stagger-5 { transition-delay: 400ms; }
+  .scroll-reveal-stagger-1 {
+    transition-delay: 80ms;
+  }
+  .scroll-reveal-stagger-2 {
+    transition-delay: 160ms;
+  }
+  .scroll-reveal-stagger-3 {
+    transition-delay: 240ms;
+  }
+  .scroll-reveal-stagger-4 {
+    transition-delay: 320ms;
+  }
+  .scroll-reveal-stagger-5 {
+    transition-delay: 400ms;
+  }
 
   /* Same as scroll-reveal for motion consistency */
   .scroll-reveal-scale {
@@ -123,7 +133,9 @@ html {
     backdrop-filter: blur(12px);
     border: 1px solid rgba(255, 255, 255, 0.5);
     border-radius: 1rem;
-    box-shadow: 0 4px 32px rgba(0, 0, 0, 0.04), 0 1px 16px rgba(0, 0, 0, 0.02);
+    box-shadow:
+      0 4px 32px rgba(0, 0, 0, 0.04),
+      0 1px 16px rgba(0, 0, 0, 0.02);
   }
   @supports not (backdrop-filter: blur(12px)) {
     .floating-surface {
@@ -135,18 +147,24 @@ html {
     backdrop-filter: blur(12px);
     border: 1px solid rgba(255, 255, 255, 0.08);
     border-radius: 1rem;
-    box-shadow: 0 4px 32px rgba(0, 0, 0, 0.12), 0 1px 16px rgba(0, 0, 0, 0.06);
+    box-shadow:
+      0 4px 32px rgba(0, 0, 0, 0.12),
+      0 1px 16px rgba(0, 0, 0, 0.06);
   }
 
   /* Selected Work: immersive editorial — hover scale 1.02–1.04, light lift */
   .project-editorial {
     box-shadow: none;
-    transition: transform 400ms ease, box-shadow 400ms ease;
+    transition:
+      transform 400ms ease,
+      box-shadow 400ms ease;
   }
   .project-editorial:hover,
   .project-editorial:focus-within {
     transform: translateY(-4px) scale(1.03);
-    box-shadow: 0 16px 32px rgba(0, 0, 0, 0.06), 0 6px 12px rgba(0, 0, 0, 0.03);
+    box-shadow:
+      0 16px 32px rgba(0, 0, 0, 0.06),
+      0 6px 12px rgba(0, 0, 0, 0.03);
   }
   .project-editorial[data-featured]:hover,
   .project-editorial[data-featured]:focus-within {
@@ -164,13 +182,20 @@ html {
   .breezy-hover:hover,
   .breezy-hover:focus-within {
     transform: translateY(-3px) scale(1.008);
-    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.05), 0 2px 8px rgba(0, 0, 0, 0.02);
+    box-shadow:
+      0 6px 20px rgba(0, 0, 0, 0.05),
+      0 2px 8px rgba(0, 0, 0, 0.02);
   }
 
   /* Subtle gradient shift (water/light) — 40s loop */
   @keyframes gradient-shift {
-    0%, 100% { background-position: 0% 50%; }
-    50% { background-position: 100% 50%; }
+    0%,
+    100% {
+      background-position: 0% 50%;
+    }
+    50% {
+      background-position: 100% 50%;
+    }
   }
   .animate-gradient-shift {
     background-size: 200% 200%;
@@ -179,8 +204,13 @@ html {
 
   /* Hero: very slow atmospheric drift — 25s, nearly imperceptible */
   @keyframes hero-gradient-drift {
-    0%, 100% { background-position: 50% 50%; }
-    50% { background-position: 52% 48%; }
+    0%,
+    100% {
+      background-position: 50% 50%;
+    }
+    50% {
+      background-position: 52% 48%;
+    }
   }
   .animate-hero-gradient-drift {
     background-size: 280% 280%;
@@ -189,8 +219,13 @@ html {
 
   /* Hero: very subtle slow zoom (1 → 1.02 over 20s) */
   @keyframes hero-zoom {
-    0%, 100% { transform: scale(1); }
-    50% { transform: scale(1.02); }
+    0%,
+    100% {
+      transform: scale(1);
+    }
+    50% {
+      transform: scale(1.02);
+    }
   }
   .animate-hero-zoom {
     animation: hero-zoom 20s ease-in-out infinite;
@@ -198,8 +233,13 @@ html {
 
   /* Statement section: slow zoom — breathing, not animation (20s, 1 → 1.03) */
   @keyframes statement-breath {
-    0%, 100% { transform: scale(1); }
-    50% { transform: scale(1.03); }
+    0%,
+    100% {
+      transform: scale(1);
+    }
+    50% {
+      transform: scale(1.03);
+    }
   }
   .animate-statement-breath {
     animation: statement-breath 20s ease-in-out infinite;
@@ -331,6 +371,8 @@ html {
   }
 
   .content-block-elevation {
-    box-shadow: 0 2px 16px rgba(0, 0, 0, 0.04), 0 1px 4px rgba(0, 0, 0, 0.02);
+    box-shadow:
+      0 2px 16px rgba(0, 0, 0, 0.04),
+      0 1px 4px rgba(0, 0, 0, 0.02);
   }
 }

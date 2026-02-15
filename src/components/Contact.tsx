@@ -1,10 +1,10 @@
-import ScrollReveal from '@/components/ScrollReveal';
 import {
   FaEnvelope,
   FaFileDownload,
   FaGithub,
   FaLinkedin,
 } from 'react-icons/fa';
+import ScrollReveal from '@/components/ScrollReveal';
 
 export default function Contact() {
   return (

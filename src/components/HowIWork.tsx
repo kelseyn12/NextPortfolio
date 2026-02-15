@@ -13,7 +13,7 @@ export default function HowIWork() {
     <section id="how-i-work" className="relative isolate overflow-hidden px-6 py-20 md:py-24">
       {/* Soft radial gradient — no hard edges */}
       <div
-        className="pointer-events-none absolute inset-0 -inset-x-[15%] -inset-y-12 md:-inset-y-16"
+        className="pointer-events-none absolute inset-0 inset-x-[-15%] inset-y-[-3rem] md:inset-y-[-4rem]"
         aria-hidden
         style={{
           background:
@@ -21,8 +21,8 @@ export default function HowIWork() {
         }}
       />
       {/* Slightly off-center — not perfectly centered */}
-      <ScrollReveal className="relative z-10 mx-auto max-w-3xl pl-[8%] pr-0 md:pl-[12%]">
-        <h2 className="mb-16 text-left text-[2.5rem] font-bold leading-tight text-navy md:mb-20 md:text-5xl lg:text-6xl">
+      <ScrollReveal className="relative z-10 mx-auto max-w-3xl pr-0 pl-[8%] md:pl-[12%]">
+        <h2 className="mb-16 text-left text-[2.5rem] leading-tight font-bold text-navy md:mb-20 md:text-5xl lg:text-6xl">
           Process
         </h2>
         <div className="space-y-0">

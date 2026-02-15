@@ -23,7 +23,7 @@ export default function WhatIDo() {
   return (
     <section id="what-i-do" className="relative px-6 py-16 md:py-20">
       <ScrollReveal className="mx-auto max-w-3xl">
-        <h2 className="mb-16 text-center text-[2.5rem] font-bold leading-tight text-navy md:mb-20 md:text-5xl lg:text-6xl">
+        <h2 className="mb-16 text-center text-[2.5rem] leading-tight font-bold text-navy md:mb-20 md:text-5xl lg:text-6xl">
           What I Do
         </h2>
         <div className="space-y-0">

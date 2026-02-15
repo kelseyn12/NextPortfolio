@@ -28,7 +28,7 @@ export default function Personality() {
   return (
     <section id="personality" className="relative px-6 py-16 md:py-20">
       <ScrollReveal className="mx-auto max-w-6xl text-center">
-        <h2 className="mb-14 text-[2.5rem] font-bold leading-tight text-navy md:mb-16 md:text-5xl lg:text-6xl">
+        <h2 className="mb-14 text-[2.5rem] leading-tight font-bold text-navy md:mb-16 md:text-5xl lg:text-6xl">
           Outside Work
         </h2>
 

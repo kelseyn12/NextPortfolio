@@ -14,6 +14,7 @@ export default function HeroImageParallax() {
     const handleScroll = () => {
       const scrollY = typeof window !== 'undefined' ? window.scrollY : 0;
       const offset = Math.min(scrollY * PARALLAX_FACTOR, MAX_OFFSET_PX);
+      // eslint-disable-next-line react-hooks-extra/no-direct-set-state-in-use-effect -- scroll parallax
       setOffsetY(offset);
     };
 
