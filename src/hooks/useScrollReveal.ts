@@ -8,7 +8,7 @@ const DEFAULT_OPTIONS: IntersectionObserverInit = {
 };
 
 export function useScrollReveal(options?: Partial<IntersectionObserverInit>) {
-  const ref = useRef<HTMLElement>(null);
+  const ref = useRef<HTMLDivElement>(null);
   const [visible, setVisible] = useState(false);
 
   useEffect(() => {
