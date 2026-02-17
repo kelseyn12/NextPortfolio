@@ -1,12 +1,17 @@
 import Image from 'next/image';
 import ScrollReveal from '@/components/ScrollReveal';
 
-/** Outside Work: use your own photos — place files in public/images/ with these names */
-const ACTIVITIES: { label: string; image: string; alt: string }[] = [
-  { label: 'Playing music', image: '/images/outside-music.jpg', alt: 'Playing music' },
-  { label: 'Bike-Boppin about', image: '/images/outside-bike.jpg', alt: 'Bike-Boppin about' },
-  { label: 'Surfing', image: '/images/outside-surf.jpg', alt: 'Surfing' },
-  { label: 'Climbing rocks', image: '/images/outside-climb.jpg', alt: 'Climbing rocks' },
+/** Outside Work: your photos in public/ — paths and crop position per tile */
+const ACTIVITIES: {
+  label: string;
+  image: string;
+  alt: string;
+  objectPosition?: string;
+}[] = [
+  { label: 'Playing music', image: '/outside-music.jpg', alt: 'Playing music', objectPosition: 'center center' },
+  { label: 'Bike-Boppin about', image: '/outside-bike.jpeg', alt: 'Bike-Boppin about', objectPosition: '50% 1000%' },
+  { label: 'Surfing', image: '/outside-surfing.JPG', alt: 'Surfing', objectPosition: 'center center' },
+  { label: 'Climbing rocks', image: '/outside-climb.JPG', alt: 'Climbing rocks', objectPosition: 'center center' },
 ];
 
 export default function Personality() {
@@ -18,7 +23,7 @@ export default function Personality() {
         </h2>
 
         <div className="grid gap-10 sm:grid-cols-2 md:grid-cols-4">
-          {ACTIVITIES.map(({ label, image, alt }, idx) => (
+          {ACTIVITIES.map(({ label, image, alt, objectPosition = 'center center' }, idx) => (
             <ScrollReveal key={label} staggerIndex={idx}>
               <div className="outside-work-tile group flex flex-col items-center">
                 <div className="relative mb-4 aspect-square w-full max-w-[200px] overflow-hidden rounded-full md:max-w-[220px]">
@@ -27,7 +32,8 @@ export default function Personality() {
                     alt={alt}
                     width={400}
                     height={400}
-                    className="object-cover object-center transition-transform duration-300 ease-out group-hover:-translate-y-1"
+                    className="object-cover transition-transform duration-300 ease-out group-hover:-translate-y-1"
+                    style={{ objectPosition }}
                   />
                 </div>
                 <p className="text-lg font-medium text-navy">{label}</p>
