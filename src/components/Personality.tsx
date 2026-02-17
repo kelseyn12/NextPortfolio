@@ -1,27 +1,12 @@
 import Image from 'next/image';
 import ScrollReveal from '@/components/ScrollReveal';
 
+/** Outside Work: use your own photos — place files in public/images/ with these names */
 const ACTIVITIES: { label: string; image: string; alt: string }[] = [
-  {
-    label: 'Playing music',
-    image: 'https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?w=400&h=400&fit=crop',
-    alt: 'Guitar and music',
-  },
-  {
-    label: 'Bike-Boppin about',
-    image: 'https://images.unsplash.com/photo-1541625602330-2277a4c46182?w=400&h=400&fit=crop',
-    alt: 'Cycling',
-  },
-  {
-    label: 'Surfing',
-    image: 'https://images.unsplash.com/photo-1502680390469-be75c86b636f?w=400&h=400&fit=crop',
-    alt: 'Surfing',
-  },
-  {
-    label: 'Climbing rocks',
-    image: 'https://images.unsplash.com/photo-1522163182402-834f871fd851?w=400&h=400&fit=crop',
-    alt: 'Rock climbing',
-  },
+  { label: 'Playing music', image: '/images/outside-music.jpg', alt: 'Playing music' },
+  { label: 'Bike-Boppin about', image: '/images/outside-bike.jpg', alt: 'Bike-Boppin about' },
+  { label: 'Surfing', image: '/images/outside-surf.jpg', alt: 'Surfing' },
+  { label: 'Climbing rocks', image: '/images/outside-climb.jpg', alt: 'Climbing rocks' },
 ];
 
 export default function Personality() {
