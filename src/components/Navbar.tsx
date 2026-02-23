@@ -20,6 +20,7 @@ export default function Navbar() {
           <div className="flex gap-8 font-medium text-navy">
             {[
               { id: 'projects', label: 'Selected Work' },
+              { id: 'short-form', label: 'Short-Form' },
               { id: 'how-i-work', label: 'Process' },
               { id: 'personality', label: 'Outside Work' },
               { id: 'contact', label: 'Contact' },
@@ -58,6 +59,7 @@ export default function Navbar() {
       >
         {[
           { id: 'projects', label: 'Selected Work' },
+          { id: 'short-form', label: 'Short-Form' },
           { id: 'how-i-work', label: 'Process' },
           { id: 'personality', label: 'Outside Work' },
           { id: 'contact', label: 'Contact' },
