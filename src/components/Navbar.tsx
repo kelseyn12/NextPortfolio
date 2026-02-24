@@ -20,16 +20,28 @@ export default function Navbar() {
           <div className="flex gap-8 font-medium text-navy">
             {[
               { id: 'projects', label: 'Selected Work' },
-              { id: 'short-form', label: 'Short-Form' },
+              { id: 'short-form', label: 'Short-Form', path: '/short-form' },
               { id: 'how-i-work', label: 'Process' },
               { id: 'personality', label: 'Outside Work' },
               { id: 'contact', label: 'Contact' },
-            ].map(({ id, label }) => (
-              <a key={id} href={`#${id}`} className="group relative">
-                {label}
-                <span className="absolute -bottom-1 left-0 h-0.5 w-0 bg-teal transition-all duration-300 group-hover:w-full" />
-              </a>
-            ))}
+            ].map(({ id, label, path }) =>
+              path ? (
+                <Link
+                  key={id}
+                  href={path}
+                  className="group relative"
+                  onClick={() => setMenuOpen(false)}
+                >
+                  {label}
+                  <span className="absolute -bottom-1 left-0 h-0.5 w-0 bg-teal transition-all duration-300 group-hover:w-full" />
+                </Link>
+              ) : (
+                <a key={id} href={`#${id}`} className="group relative">
+                  {label}
+                  <span className="absolute -bottom-1 left-0 h-0.5 w-0 bg-teal transition-all duration-300 group-hover:w-full" />
+                </a>
+              ),
+            )}
           </div>
           <Link
             href="#projects"
@@ -59,20 +71,31 @@ export default function Navbar() {
       >
         {[
           { id: 'projects', label: 'Selected Work' },
-          { id: 'short-form', label: 'Short-Form' },
+          { id: 'short-form', label: 'Short-Form', path: '/short-form' },
           { id: 'how-i-work', label: 'Process' },
           { id: 'personality', label: 'Outside Work' },
           { id: 'contact', label: 'Contact' },
-        ].map(({ id, label }) => (
-          <a
-            key={id}
-            href={`#${id}`}
-            className="text-navy transition hover:text-teal"
-            onClick={() => setMenuOpen(false)}
-          >
-            {label}
-          </a>
-        ))}
+        ].map(({ id, label, path }) =>
+          path ? (
+            <Link
+              key={id}
+              href={path}
+              className="text-navy transition hover:text-teal"
+              onClick={() => setMenuOpen(false)}
+            >
+              {label}
+            </Link>
+          ) : (
+            <a
+              key={id}
+              href={`#${id}`}
+              className="text-navy transition hover:text-teal"
+              onClick={() => setMenuOpen(false)}
+            >
+              {label}
+            </a>
+          ),
+        )}
         <Link
           href="#projects"
           className="mt-2 rounded-lg border border-teal/50 px-3 py-2 text-sm font-medium text-navy transition duration-200 ease-in-out hover:border-teal hover:bg-teal/10"
