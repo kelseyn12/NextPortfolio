@@ -44,7 +44,7 @@ export default function ShortFormContent({
           </a>
         </ScrollReveal>
 
-        <div className="mx-auto max-w-3xl space-y-8 md:space-y-10">
+        <div className="mx-auto mt-14 max-w-3xl space-y-8 md:mt-16 md:space-y-10">
           {LANDSCAPE_VIDEOS.map(({ label, src }) => (
             <ScrollReveal key={label} className="flex flex-col">
               <div className="relative aspect-video w-full overflow-hidden rounded-lg bg-steel/15">
