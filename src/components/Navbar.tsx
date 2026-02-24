@@ -9,11 +9,11 @@ export default function Navbar() {
     <nav className="fixed top-0 left-0 z-50 w-full border-b border-navy/10 bg-white/90 backdrop-blur-md">
       <div className="mx-auto flex max-w-6xl items-center justify-between px-6 py-6">
         {/* Logo / Name */}
-        <a href="#hero" className="text-xl font-extrabold tracking-tight">
+        <Link href="/" className="text-xl font-extrabold tracking-tight">
           <span className="text-navy">Kelsey</span>
           {' '}
           <span className="text-teal">Nocek</span>
-        </a>
+        </Link>
 
         {/* Desktop: Links + CTA */}
         <div className="hidden items-center gap-8 md:flex">
