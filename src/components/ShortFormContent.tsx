@@ -33,9 +33,15 @@ export default function ShortFormContent({
           <HeadingTag className="mb-6 text-[2.75rem] leading-tight font-bold text-navy md:mb-8 md:text-5xl lg:text-6xl">
             {title}
           </HeadingTag>
-          <p className="mx-auto mb-12 max-w-2xl text-lg leading-relaxed text-steel md:mb-14">
+          <p className="mx-auto mb-8 max-w-2xl text-lg leading-relaxed text-steel md:mb-10">
             {intro}
           </p>
+          <a
+            href={ctaHref}
+            className="breezy-hover inline-block rounded-2xl border-2 border-coral bg-transparent px-8 py-3.5 font-semibold text-navy hover:border-coral hover:bg-coral/10 hover:text-coral md:px-10 md:py-4"
+          >
+            Get in touch
+          </a>
         </ScrollReveal>
 
         <div className="mx-auto max-w-3xl space-y-8 md:space-y-10">
@@ -79,15 +85,6 @@ export default function ShortFormContent({
             ))}
           </ScrollReveal>
         </div>
-
-        <ScrollReveal className="mt-12 text-center md:mt-14">
-          <a
-            href={ctaHref}
-            className="breezy-hover inline-block rounded-2xl border-2 border-coral bg-transparent px-8 py-3.5 font-semibold text-navy hover:border-coral hover:bg-coral/10 hover:text-coral md:px-10 md:py-4"
-          >
-            Get in touch
-          </a>
-        </ScrollReveal>
       </div>
     </section>
   );
