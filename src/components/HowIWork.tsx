@@ -4,7 +4,7 @@ export default function HowIWork() {
   const steps = [
     { number: 1, title: 'We talk', text: 'Quick call or email to understand what you need and whether we’re a good fit.' },
     { number: 2, title: 'Scope & timeline', text: 'I outline what I’ll deliver and when, so there are no surprises.' },
-    { number: 3, title: 'Build', text: 'I do the work in clear phases and keep you in the loop.' },
+    { number: 3, title: 'Make', text: 'I do the work in clear phases and keep you in the loop — whether it’s a build, a shoot, or both.' },
     { number: 4, title: 'Review & refine', text: 'You see it, give feedback, and we adjust until it feels right.' },
     { number: 5, title: 'Handoff', text: 'You get everything you need to own or maintain it going forward.' },
   ];

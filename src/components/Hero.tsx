@@ -97,7 +97,7 @@ export default function Hero() {
           Digital Product Designer & Developer
         </p>
         <p className="animate-fade-in-up mx-auto mb-10 max-w-2xl text-lg leading-relaxed text-white/90 opacity-0 delay-500 md:mb-12 md:text-xl">
-          I design and build digital experiences for surf, bike, climbing and adventure communities.
+          I design and build digital experiences, and create short-form brand content for surf, bike, climbing and adventure communities.
         </p>
         <a
           href="#projects"
