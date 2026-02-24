@@ -26,6 +26,9 @@ export default function ShortFormContent({
   titleTag = 'h2',
 }: ShortFormContentProps) {
   const HeadingTag = titleTag;
+  const hellyHansen = LANDSCAPE_VIDEOS[0]!;
+  const film = LANDSCAPE_VIDEOS[1]!;
+
   return (
     <section id="short-form" className="relative px-4 py-16 md:px-8 md:py-20">
       <div className="mx-auto max-w-[90rem]">
@@ -46,10 +49,10 @@ export default function ShortFormContent({
 
         <div className="mx-auto mt-14 max-w-3xl space-y-8 md:mt-16 md:space-y-10">
           {/* 1. Helly Hansen (landscape) */}
-          <ScrollReveal key={LANDSCAPE_VIDEOS[0].label} className="flex flex-col">
+          <ScrollReveal key={hellyHansen.label} className="flex flex-col">
             <div className="relative aspect-video w-full overflow-hidden rounded-lg bg-steel/15">
               <video
-                src={LANDSCAPE_VIDEOS[0].src}
+                src={hellyHansen.src}
                 controls
                 preload="metadata"
                 playsInline
@@ -59,7 +62,7 @@ export default function ShortFormContent({
               </video>
             </div>
             <p className="mt-3 text-sm font-medium text-navy md:mt-4">
-              {LANDSCAPE_VIDEOS[0].label}
+              {hellyHansen.label}
             </p>
           </ScrollReveal>
 
@@ -86,10 +89,10 @@ export default function ShortFormContent({
           </ScrollReveal>
 
           {/* 3. Film (landscape) */}
-          <ScrollReveal key={LANDSCAPE_VIDEOS[1].label} className="flex flex-col">
+          <ScrollReveal key={film.label} className="flex flex-col">
             <div className="relative aspect-video w-full overflow-hidden rounded-lg bg-steel/15">
               <video
-                src={LANDSCAPE_VIDEOS[1].src}
+                src={film.src}
                 controls
                 preload="metadata"
                 playsInline
@@ -99,7 +102,7 @@ export default function ShortFormContent({
               </video>
             </div>
             <p className="mt-3 text-sm font-medium text-navy md:mt-4">
-              {LANDSCAPE_VIDEOS[1].label}
+              {film.label}
             </p>
           </ScrollReveal>
         </div>
