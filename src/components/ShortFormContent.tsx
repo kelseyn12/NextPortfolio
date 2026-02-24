@@ -19,7 +19,7 @@ export default function ShortFormContent() {
       <div className="mx-auto max-w-[90rem]">
         <ScrollReveal className="text-center">
           <h2 className="mb-6 text-[2.75rem] leading-tight font-bold text-navy md:mb-8 md:text-5xl lg:text-6xl">
-            Short-Form Content for Outdoor Brands
+            Short-Form Concept Samples
           </h2>
           <p className="mx-auto mb-12 max-w-2xl text-lg leading-relaxed text-steel md:mb-14">
             {INTRO}
