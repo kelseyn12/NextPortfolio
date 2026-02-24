@@ -45,25 +45,25 @@ export default function ShortFormContent({
         </ScrollReveal>
 
         <div className="mx-auto mt-14 max-w-3xl space-y-8 md:mt-16 md:space-y-10">
-          {LANDSCAPE_VIDEOS.map(({ label, src }) => (
-            <ScrollReveal key={label} className="flex flex-col">
-              <div className="relative aspect-video w-full overflow-hidden rounded-lg bg-steel/15">
-                <video
-                  src={src}
-                  controls
-                  preload="metadata"
-                  playsInline
-                  className="h-full w-full object-contain"
-                >
-                  <track kind="captions" />
-                </video>
-              </div>
-              <p className="mt-3 text-sm font-medium text-navy md:mt-4">
-                {label}
-              </p>
-            </ScrollReveal>
-          ))}
+          {/* 1. Helly Hansen (landscape) */}
+          <ScrollReveal key={LANDSCAPE_VIDEOS[0].label} className="flex flex-col">
+            <div className="relative aspect-video w-full overflow-hidden rounded-lg bg-steel/15">
+              <video
+                src={LANDSCAPE_VIDEOS[0].src}
+                controls
+                preload="metadata"
+                playsInline
+                className="h-full w-full object-contain"
+              >
+                <track kind="captions" />
+              </video>
+            </div>
+            <p className="mt-3 text-sm font-medium text-navy md:mt-4">
+              {LANDSCAPE_VIDEOS[0].label}
+            </p>
+          </ScrollReveal>
 
+          {/* 2. Portrait videos (Keen, Wilderdog) */}
           <ScrollReveal className="grid grid-cols-1 grid-rows-2 gap-5 md:grid-cols-2 md:gap-6">
             {PORTRAIT_VIDEOS.map(({ label, src }) => (
               <div key={label} className="flex flex-col">
@@ -83,6 +83,24 @@ export default function ShortFormContent({
                 </p>
               </div>
             ))}
+          </ScrollReveal>
+
+          {/* 3. Film (landscape) */}
+          <ScrollReveal key={LANDSCAPE_VIDEOS[1].label} className="flex flex-col">
+            <div className="relative aspect-video w-full overflow-hidden rounded-lg bg-steel/15">
+              <video
+                src={LANDSCAPE_VIDEOS[1].src}
+                controls
+                preload="metadata"
+                playsInline
+                className="h-full w-full object-contain"
+              >
+                <track kind="captions" />
+              </video>
+            </div>
+            <p className="mt-3 text-sm font-medium text-navy md:mt-4">
+              {LANDSCAPE_VIDEOS[1].label}
+            </p>
           </ScrollReveal>
         </div>
       </div>
