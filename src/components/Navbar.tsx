@@ -25,22 +25,24 @@ export default function Navbar() {
               { id: 'personality', label: 'Outside Work' },
               { id: 'contact', label: 'Contact' },
             ].map(({ id, label, path }) =>
-              path ? (
-                <Link
-                  key={id}
-                  href={path}
-                  className="group relative"
-                  onClick={() => setMenuOpen(false)}
-                >
-                  {label}
-                  <span className="absolute -bottom-1 left-0 h-0.5 w-0 bg-teal transition-all duration-300 group-hover:w-full" />
-                </Link>
-              ) : (
-                <a key={id} href={`#${id}`} className="group relative">
-                  {label}
-                  <span className="absolute -bottom-1 left-0 h-0.5 w-0 bg-teal transition-all duration-300 group-hover:w-full" />
-                </a>
-              ),
+              path
+                ? (
+                    <Link
+                      key={id}
+                      href={path}
+                      className="group relative"
+                      onClick={() => setMenuOpen(false)}
+                    >
+                      {label}
+                      <span className="absolute -bottom-1 left-0 h-0.5 w-0 bg-teal transition-all duration-300 group-hover:w-full" />
+                    </Link>
+                  )
+                : (
+                    <a key={id} href={`#${id}`} className="group relative">
+                      {label}
+                      <span className="absolute -bottom-1 left-0 h-0.5 w-0 bg-teal transition-all duration-300 group-hover:w-full" />
+                    </a>
+                  ),
             )}
           </div>
           <Link
@@ -76,25 +78,27 @@ export default function Navbar() {
           { id: 'personality', label: 'Outside Work' },
           { id: 'contact', label: 'Contact' },
         ].map(({ id, label, path }) =>
-          path ? (
-            <Link
-              key={id}
-              href={path}
-              className="text-navy transition hover:text-teal"
-              onClick={() => setMenuOpen(false)}
-            >
-              {label}
-            </Link>
-          ) : (
-            <a
-              key={id}
-              href={`#${id}`}
-              className="text-navy transition hover:text-teal"
-              onClick={() => setMenuOpen(false)}
-            >
-              {label}
-            </a>
-          ),
+          path
+            ? (
+                <Link
+                  key={id}
+                  href={path}
+                  className="text-navy transition hover:text-teal"
+                  onClick={() => setMenuOpen(false)}
+                >
+                  {label}
+                </Link>
+              )
+            : (
+                <a
+                  key={id}
+                  href={`#${id}`}
+                  className="text-navy transition hover:text-teal"
+                  onClick={() => setMenuOpen(false)}
+                >
+                  {label}
+                </a>
+              ),
         )}
         <Link
           href="#projects"

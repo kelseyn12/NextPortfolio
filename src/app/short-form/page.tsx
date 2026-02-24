@@ -1,5 +1,5 @@
-import ShortFormContent from '@/components/ShortFormContent';
 import type { Metadata } from 'next';
+import ShortFormContent from '@/components/ShortFormContent';
 
 export const metadata: Metadata = {
   title: 'Short-Form | Kelsey Nocek',
