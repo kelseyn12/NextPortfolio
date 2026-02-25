@@ -1,9 +1,13 @@
 'use client';
 import Link from 'next/link';
+import { usePathname } from 'next/navigation';
 import { useState } from 'react';
 
 export default function Navbar() {
   const [menuOpen, setMenuOpen] = useState(false);
+  const pathname = usePathname();
+  const isHome = pathname === '/';
+  const sectionHref = (id: string) => (isHome ? `#${id}` : `/#${id}`);
 
   return (
     <nav className="fixed top-0 left-0 z-50 w-full border-b border-navy/10 bg-white/90 backdrop-blur-md">
@@ -38,15 +42,20 @@ export default function Navbar() {
                     </Link>
                   )
                 : (
-                    <a key={id} href={`#${id}`} className="group relative">
+                    <Link
+                      key={id}
+                      href={sectionHref(id)}
+                      className="group relative"
+                      onClick={() => setMenuOpen(false)}
+                    >
                       {label}
                       <span className="absolute -bottom-1 left-0 h-0.5 w-0 bg-teal transition-all duration-300 group-hover:w-full" />
-                    </a>
+                    </Link>
                   ),
             )}
           </div>
           <Link
-            href="#projects"
+            href={sectionHref('projects')}
             className="rounded-lg border border-teal/50 px-4 py-2 text-sm font-medium text-navy transition duration-200 ease-in-out hover:border-teal hover:bg-teal/10"
           >
             Start a project
@@ -90,18 +99,18 @@ export default function Navbar() {
                 </Link>
               )
             : (
-                <a
+                <Link
                   key={id}
-                  href={`#${id}`}
+                  href={sectionHref(id)}
                   className="text-navy transition hover:text-teal"
                   onClick={() => setMenuOpen(false)}
                 >
                   {label}
-                </a>
+                </Link>
               ),
         )}
         <Link
-          href="#projects"
+          href={sectionHref('projects')}
           className="mt-2 rounded-lg border border-teal/50 px-3 py-2 text-sm font-medium text-navy transition duration-200 ease-in-out hover:border-teal hover:bg-teal/10"
           onClick={() => setMenuOpen(false)}
         >

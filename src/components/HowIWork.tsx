@@ -10,7 +10,7 @@ export default function HowIWork() {
   ];
 
   return (
-    <section id="how-i-work" className="relative isolate overflow-hidden px-6 py-20 md:py-24">
+    <section id="how-i-work" className="relative isolate overflow-hidden -mt-20 px-6 py-20 md:-mt-24 md:py-24">
       {/* Soft radial gradient — no hard edges */}
       <div
         className="pointer-events-none absolute inset-0 inset-x-[-15%] inset-y-[-3rem] md:inset-y-[-4rem]"

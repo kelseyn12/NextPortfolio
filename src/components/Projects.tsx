@@ -40,7 +40,7 @@ function ProjectBlock({
       href={project.link}
       target="_blank"
       rel="noopener noreferrer"
-      className={`project-editorial group relative block w-full overflow-hidden rounded-none ${featured ? 'aspect-[4/3] md:aspect-[5/4]' : 'aspect-[4/3] md:aspect-[6/5]'}`}
+      className={`project-editorial group relative block w-full overflow-hidden rounded-none ${featured ? 'aspect-[4/3] md:aspect-[16/10]' : 'aspect-[4/3] md:aspect-[3/2]'}`}
       data-featured={featured ? 'true' : undefined}
     >
       {featured
@@ -63,7 +63,7 @@ function ProjectBlock({
               src={project.image}
               alt={project.title}
               fill
-              className="object-cover object-center transition-transform duration-400 ease-out group-hover:scale-[1.02]"
+              className="object-contain object-center transition-transform duration-400 ease-out group-hover:scale-[1.02]"
               sizes="(min-width:1024px) 33vw, (min-width:768px) 50vw, 100vw"
             />
           )}
@@ -204,18 +204,20 @@ export default function Projects() {
         </ScrollReveal>
       </div>
 
-      {/* First project: full-bleed edge-to-edge, no side padding */}
-      <ScrollReveal className="w-full" staggerIndex={0}>
-        <ProjectBlock
-          project={featured}
-          overlay={getOverlay(0)}
-          featured
-          parallaxY={featuredParallaxY}
-        />
-      </ScrollReveal>
+      {/* First project: contained and a bit smaller so it reads as a website project */}
+      <div className="mx-auto max-w-5xl px-4 md:px-8">
+        <ScrollReveal className="w-full" staggerIndex={0}>
+          <ProjectBlock
+            project={featured}
+            overlay={getOverlay(0)}
+            featured
+            parallaxY={featuredParallaxY}
+          />
+        </ScrollReveal>
+      </div>
 
       <div className="mx-auto max-w-[90rem] px-4 md:px-8">
-        <div className="grid grid-cols-1 gap-12 pt-12 md:gap-14 md:pt-16 lg:grid-cols-3 lg:gap-12">
+        <div className="grid grid-cols-1 gap-12 pt-12 md:gap-14 md:pt-16 lg:grid-cols-3 lg:gap-8">
           {rest.map((project, idx) => (
             <ScrollReveal key={project.title} staggerIndex={idx < 5 ? idx + 1 : undefined}>
               <ProjectBlock

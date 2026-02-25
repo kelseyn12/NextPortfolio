@@ -16,7 +16,7 @@ const ACTIVITIES: {
 
 export default function Personality() {
   return (
-    <section id="personality" className="relative px-6 py-16 md:py-20">
+    <section id="personality" className="relative -mt-16 px-6 py-16 md:-mt-20 md:py-20">
       <ScrollReveal className="mx-auto max-w-6xl text-center">
         <h2 className="mb-14 text-[2.5rem] leading-tight font-bold text-navy md:mb-16 md:text-5xl lg:text-6xl">
           Outside Work

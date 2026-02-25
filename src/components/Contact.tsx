@@ -8,7 +8,7 @@ import ScrollReveal from '@/components/ScrollReveal';
 
 export default function Contact() {
   return (
-    <section id="contact" className="relative px-6 py-16 md:py-20">
+    <section id="contact" className="relative -mt-16 px-6 py-16 md:-mt-20 md:py-20">
       <ScrollReveal className="floating-surface mx-auto max-w-4xl px-8 py-12 text-center md:px-10 md:py-14">
         <h2 className="mb-8 inline-block border-b-2 border-coral/70 pb-2 text-4xl font-bold text-navy md:text-5xl">
           Let’s Connect
