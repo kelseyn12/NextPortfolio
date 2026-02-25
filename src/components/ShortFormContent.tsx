@@ -67,7 +67,7 @@ export default function ShortFormContent({
           </ScrollReveal>
 
           {/* 2. Portrait videos (Keen, Wilderdog) */}
-          <ScrollReveal className="grid grid-cols-1 grid-rows-2 gap-5 md:grid-cols-2 md:gap-6">
+          <ScrollReveal className="grid grid-cols-1 grid-rows-2 gap-5 md:grid-cols-2 md:grid-rows-1 md:gap-6">
             {PORTRAIT_VIDEOS.map(({ label, src }) => (
               <div key={label} className="flex flex-col">
                 <div className="relative aspect-[9/16] w-full overflow-hidden rounded-lg bg-steel/15">
