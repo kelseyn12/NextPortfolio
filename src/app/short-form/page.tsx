@@ -11,7 +11,7 @@ export default function ShortFormPage() {
   return (
     <ShortFormContent
       title="Short-Form Samples"
-      intro="Samples of the short-form content I create around movement, gear, and the places I'm in — not paid partnerships (yet), just examples of what I can do."
+      intro="Personal projects showing how I work."
       ctaHref="/#contact"
       titleTag="h1"
     />
