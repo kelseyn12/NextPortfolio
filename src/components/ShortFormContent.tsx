@@ -4,12 +4,12 @@ import Image from 'next/image';
 import { useCallback, useEffect, useState } from 'react';
 import ScrollReveal from '@/components/ScrollReveal';
 
-/** Paths from public/. Landscape videos each get a full-width 16:9 row (captions visible). */
+/** Paths from public/. Landscape videos each get a full-width 16:9 row. */
 const LANDSCAPE_VIDEOS: { label: string; src: string }[] = [
   { label: 'Film', src: '/video/Ifilmplaces.mp4' },
-  { label: 'Helly Hansen', src: '/video/HH.mp4' },
 ];
 const PORTRAIT_VIDEOS: { label: string; src: string }[] = [
+  { label: 'ROMP', src: '/video/Romp-v2.mp4' },
   { label: 'Keen', src: '/video/Keen.mp4' },
   { label: 'Wilderdog', src: '/video/Wilderdog.mp4' },
 ];
@@ -79,7 +79,6 @@ export default function ShortFormContent({
 }: ShortFormContentProps) {
   const HeadingTag = titleTag;
   const film = LANDSCAPE_VIDEOS[0]!;
-  const hellyHansen = LANDSCAPE_VIDEOS[1]!;
   const [lightbox, setLightbox] = useState<{ src: string; alt: string } | null>(null);
   const closeLightbox = useCallback(() => setLightbox(null), []);
 
@@ -109,26 +108,8 @@ export default function ShortFormContent({
         </ScrollReveal>
 
         <div className="mx-auto mt-14 max-w-3xl space-y-8 md:mt-16 md:space-y-10">
-          {/* 1. Film (landscape) */}
-          <ScrollReveal key={film.label} className="flex flex-col">
-            <div className="relative aspect-video w-full overflow-hidden rounded-lg bg-steel/15">
-              <video
-                src={film.src}
-                controls
-                preload="metadata"
-                playsInline
-                className="h-full w-full object-contain"
-              >
-                <track kind="captions" />
-              </video>
-            </div>
-            <p className="mt-3 text-sm font-medium text-navy md:mt-4">
-              {film.label}
-            </p>
-          </ScrollReveal>
-
-          {/* 2. Portrait videos (Keen, Wilderdog) */}
-          <ScrollReveal className="grid grid-cols-1 grid-rows-2 gap-5 md:grid-cols-2 md:grid-rows-1 md:gap-6">
+          {/* 1. Portrait videos (ROMP, Keen, Wilderdog) — 3 in a row */}
+          <ScrollReveal className="grid grid-cols-1 grid-rows-3 gap-5 md:grid-cols-3 md:grid-rows-1 md:gap-6">
             {PORTRAIT_VIDEOS.map(({ label, src }) => (
               <div key={label} className="flex flex-col">
                 <div className="relative aspect-[9/16] w-full overflow-hidden rounded-lg bg-steel/15">
@@ -149,11 +130,11 @@ export default function ShortFormContent({
             ))}
           </ScrollReveal>
 
-          {/* 3. Helly Hansen (landscape) */}
-          <ScrollReveal key={hellyHansen.label} className="flex flex-col">
+          {/* 2. Film (landscape) */}
+          <ScrollReveal key={film.label} className="flex flex-col">
             <div className="relative aspect-video w-full overflow-hidden rounded-lg bg-steel/15">
               <video
-                src={hellyHansen.src}
+                src={film.src}
                 controls
                 preload="metadata"
                 playsInline
@@ -163,11 +144,11 @@ export default function ShortFormContent({
               </video>
             </div>
             <p className="mt-3 text-sm font-medium text-navy md:mt-4">
-              {hellyHansen.label}
+              {film.label}
             </p>
           </ScrollReveal>
 
-          {/* 4. Portrait stills — Row 1: Rad Fab x2 */}
+          {/* 3. Portrait stills — Row 1: Rad Fab x2 */}
           <ScrollReveal className="grid grid-cols-1 grid-rows-2 gap-5 md:grid-cols-2 md:grid-rows-1 md:gap-6">
             {IMAGE_ROW_1.map(({ src, label }) => (
               <div key={src} className="flex flex-col">
@@ -191,7 +172,7 @@ export default function ShortFormContent({
             ))}
           </ScrollReveal>
 
-          {/* 5. Portrait stills — Row 1: Altra 1+2; Row 2: Rompbag 1+2; Row 3: RadFab 2+3 */}
+          {/* 4. Portrait stills — Row 1: Altra 1+2; Row 2: Rompbag 1+2; Row 3: RadFab 2+3 */}
           <ScrollReveal className="grid grid-cols-1 grid-rows-2 gap-5 md:grid-cols-2 md:grid-rows-1 md:gap-6">
             {IMAGE_ROW_2.map(({ src, label }) => (
               <div key={src} className="flex flex-col">
@@ -215,7 +196,7 @@ export default function ShortFormContent({
             ))}
           </ScrollReveal>
 
-          {/* 6. Portrait stills — Row 3 */}
+          {/* 5. Portrait stills — Row 3 */}
           <ScrollReveal className="grid grid-cols-1 grid-rows-2 gap-5 md:grid-cols-2 md:grid-rows-1 md:gap-6">
             {IMAGE_ROW_3.map(({ src, label }) => (
               <div key={src} className="flex flex-col">
