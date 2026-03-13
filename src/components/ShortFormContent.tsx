@@ -8,8 +8,8 @@ import ScrollReveal from '@/components/ScrollReveal';
 const LANDSCAPE_VIDEOS: { label: string; src: string }[] = [
   { label: 'Film', src: '/video/Ifilmplaces.mp4' },
 ];
-const PORTRAIT_VIDEOS: { label: string; src: string }[] = [
-  { label: 'ROMP', src: '/video/Romp-v2.mp4' },
+const PORTRAIT_VIDEOS: { label: string; src?: string; youtubeId?: string }[] = [
+  { label: 'ROMP', youtubeId: 'GLqp3npVxrk' },
   { label: 'Keen', src: '/video/Keen.mp4' },
   { label: 'Wilderdog', src: '/video/Wilderdog.mp4' },
 ];
@@ -110,18 +110,33 @@ export default function ShortFormContent({
         <div className="mx-auto mt-14 max-w-3xl space-y-8 md:mt-16 md:space-y-10">
           {/* 1. Portrait videos (ROMP, Keen, Wilderdog) — 3 in a row */}
           <ScrollReveal className="grid grid-cols-1 grid-rows-3 gap-5 md:grid-cols-3 md:grid-rows-1 md:gap-6">
-            {PORTRAIT_VIDEOS.map(({ label, src }) => (
+            {PORTRAIT_VIDEOS.map(({ label, src, youtubeId }) => (
               <div key={label} className="flex flex-col">
                 <div className="relative aspect-[9/16] w-full overflow-hidden rounded-lg bg-steel/15">
-                  <video
-                    src={src}
-                    controls
-                    preload="metadata"
-                    playsInline
-                    className="h-full w-full object-cover"
-                  >
-                    <track kind="captions" />
-                  </video>
+                  {youtubeId
+                    ? (
+                        /* eslint-disable react-dom/no-unsafe-iframe-sandbox -- YouTube embed needs allow-scripts and allow-same-origin for playback */
+                        <iframe
+                          src={`https://www.youtube.com/embed/${youtubeId}`}
+                          title={label}
+                          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                          allowFullScreen
+                          sandbox="allow-scripts allow-same-origin allow-popups"
+                          className="absolute inset-0 h-full w-full object-cover"
+                        />
+                        /* eslint-enable react-dom/no-unsafe-iframe-sandbox */
+                      )
+                    : (
+                        <video
+                          src={src}
+                          controls
+                          preload="metadata"
+                          playsInline
+                          className="h-full w-full object-cover"
+                        >
+                          <track kind="captions" />
+                        </video>
+                      )}
                 </div>
                 <p className="mt-3 text-sm font-medium text-navy md:mt-4">
                   {label}
@@ -154,7 +169,7 @@ export default function ShortFormContent({
               <div key={src} className="flex flex-col">
                 <button
                   type="button"
-                  className="relative w-full aspect-[9/16] overflow-hidden rounded-lg bg-steel/15 text-left focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-teal"
+                  className="relative aspect-[9/16] w-full overflow-hidden rounded-lg bg-steel/15 text-left focus:ring-2 focus:ring-teal focus:ring-offset-2 focus:outline-none"
                   onClick={() => setLightbox({ src, alt: label })}
                 >
                   <Image
@@ -178,7 +193,7 @@ export default function ShortFormContent({
               <div key={src} className="flex flex-col">
                 <button
                   type="button"
-                  className="relative w-full aspect-[9/16] overflow-hidden rounded-lg bg-steel/15 text-left focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-teal"
+                  className="relative aspect-[9/16] w-full overflow-hidden rounded-lg bg-steel/15 text-left focus:ring-2 focus:ring-teal focus:ring-offset-2 focus:outline-none"
                   onClick={() => setLightbox({ src, alt: label })}
                 >
                   <Image
@@ -202,7 +217,7 @@ export default function ShortFormContent({
               <div key={src} className="flex flex-col">
                 <button
                   type="button"
-                  className="relative w-full aspect-[9/16] overflow-hidden rounded-lg bg-steel/15 text-left focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-teal"
+                  className="relative aspect-[9/16] w-full overflow-hidden rounded-lg bg-steel/15 text-left focus:ring-2 focus:ring-teal focus:ring-offset-2 focus:outline-none"
                   onClick={() => setLightbox({ src, alt: label })}
                 >
                   <Image
