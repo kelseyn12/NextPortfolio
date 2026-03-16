@@ -117,7 +117,7 @@ export default function ShortFormContent({
                     ? (
                         /* eslint-disable react-dom/no-unsafe-iframe-sandbox -- YouTube embed needs allow-scripts and allow-same-origin for playback */
                         <iframe
-                          src={`https://www.youtube.com/embed/${youtubeId}`}
+                          src={`https://www.youtube-nocookie.com/embed/${youtubeId}?modestbranding=1&rel=0&playsinline=1&iv_load_policy=3`}
                           title={label}
                           allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
                           allowFullScreen
