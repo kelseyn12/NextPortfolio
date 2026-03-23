@@ -1,73 +1,54 @@
 'use client';
 
 import Image from 'next/image';
-import { useCallback, useEffect, useState } from 'react';
+import { useCallback, useState } from 'react';
 import ScrollReveal from '@/components/ScrollReveal';
+import {
+  FilterSection,
+  Lightbox,
+  YoutubePortraitIframe,
+} from '@/components/short-form/shortFormMedia';
 
-/** Paths from public/. Landscape videos each get a full-width 16:9 row. */
-const LANDSCAPE_VIDEOS: { label: string; src: string }[] = [
-  { label: 'Film', src: '/video/Ifilmplaces.mp4' },
+type FilterId = 'all' | 'brand-content' | 'product-reviews' | 'stills';
+
+const FILTERS: { id: FilterId; label: string }[] = [
+  { id: 'all', label: 'All' },
+  { id: 'brand-content', label: 'Brand Content' },
+  { id: 'product-reviews', label: 'Product Reviews' },
+  { id: 'stills', label: 'Stills' },
 ];
-const PORTRAIT_VIDEOS: { label: string; src?: string; youtubeId?: string }[] = [
+
+/** Brand portrait videos: ROMP (YouTube), Keen, Wilderdog (local). */
+const BRAND_PORTRAIT_VIDEOS: { label: string; src?: string; youtubeId?: string }[] = [
   { label: 'ROMP', youtubeId: 'GLqp3npVxrk' },
   { label: 'Keen', src: '/video/Keen.mp4' },
   { label: 'Wilderdog', src: '/video/Wilderdog.mp4' },
 ];
 
-/** Portrait stills. Row 1, 2, 3 — paths under public/images. */
-const IMAGE_ROW_1: { src: string; label: string }[] = [
+/** Product Reviews — YouTube Shorts only. */
+const PRODUCT_REVIEW_VIDEOS: { label: string; youtubeId: string }[] = [
+  { label: 'DJI Mic Mini', youtubeId: '9KS4jHdY5vg' },
+];
+
+const LANDSCAPE_FILM = { label: 'Film', src: '/video/Ifilmplaces.mp4' } as const;
+
+const IMAGE_ROW_ALTRA: { src: string; label: string }[] = [
   { src: '/images/altra1.jpg', label: 'Altra' },
   { src: '/images/altra2.jpg', label: 'Altra' },
 ];
-const IMAGE_ROW_2: { src: string; label: string }[] = [
+const IMAGE_ROW_ROMP: { src: string; label: string }[] = [
   { src: '/images/Rompbag1.jpg', label: 'ROMP Bags' },
   { src: '/images/Rompbag2.jpg', label: 'ROMP Bags' },
 ];
-const IMAGE_ROW_3: { src: string; label: string }[] = [
+const IMAGE_ROW_RADFAB: { src: string; label: string }[] = [
   { src: '/images/RadFabJeans2.JPG', label: 'Rad Fab Denim' },
   { src: '/images/RadFabJeans3.JPG', label: 'Rad Fab Denim' },
 ];
 
-function Lightbox({
-  src,
-  alt,
-  onClose,
-}: { src: string; alt: string; onClose: () => void }) {
-  useEffect(() => {
-    const handleKey = (e: KeyboardEvent) => {
-      if (e.key === 'Escape') {
-        onClose();
-      }
-    };
-    window.addEventListener('keydown', handleKey);
-    return () => window.removeEventListener('keydown', handleKey);
-  }, [onClose]);
-
-  return (
-    <button
-      type="button"
-      className="fixed inset-0 z-[100] flex cursor-default items-center justify-center bg-black/90 p-4 focus:outline-none"
-      onClick={onClose}
-      aria-label="Close lightbox"
-    >
-      {/* Lightbox uses img so full-res image loads on demand; thumbnails use next/image */}
-      {/* eslint-disable-next-line @next/next/no-img-element, jsx-a11y/click-events-have-key-events, jsx-a11y/no-noninteractive-element-interactions */}
-      <img
-        src={src}
-        alt={alt}
-        className="max-h-full max-w-full object-contain"
-        onClick={e => e.stopPropagation()}
-      />
-    </button>
-  );
-}
-
 type ShortFormContentProps = {
   title?: string;
   intro?: string;
-  /** CTA link (e.g. "/#contact" on standalone page, "#contact" when on homepage). */
   ctaHref?: string;
-  /** Use "h1" on standalone page for one top-level heading; "h2" when section of another page. */
   titleTag?: 'h1' | 'h2';
 };
 
@@ -78,9 +59,13 @@ export default function ShortFormContent({
   titleTag = 'h2',
 }: ShortFormContentProps) {
   const HeadingTag = titleTag;
-  const film = LANDSCAPE_VIDEOS[0]!;
+  const [activeFilter, setActiveFilter] = useState<FilterId>('all');
   const [lightbox, setLightbox] = useState<{ src: string; alt: string } | null>(null);
   const closeLightbox = useCallback(() => setLightbox(null), []);
+
+  const showBrand = activeFilter === 'all' || activeFilter === 'brand-content';
+  const showProductReviews = activeFilter === 'all' || activeFilter === 'product-reviews';
+  const showStills = activeFilter === 'all' || activeFilter === 'stills';
 
   return (
     <section id="short-form" className="relative px-4 py-16 md:px-8 md:py-20">
@@ -105,135 +90,163 @@ export default function ShortFormContent({
           >
             Get in touch
           </a>
+
+          <div
+            className="mt-8 flex flex-wrap items-center justify-center gap-3 md:mt-10 md:gap-4"
+            role="group"
+            aria-label="Filter content by category"
+          >
+            {FILTERS.map(({ id, label }) => {
+              const selected = activeFilter === id;
+              return (
+                <button
+                  key={id}
+                  type="button"
+                  onClick={() => setActiveFilter(id)}
+                  aria-pressed={selected}
+                  className={`rounded-2xl border-2 px-5 py-2.5 text-sm font-semibold transition-colors duration-200 md:px-6 md:py-3 ${
+                    selected
+                      ? 'border-coral bg-coral/10 text-coral'
+                      : 'border-navy/20 bg-transparent text-navy hover:border-coral hover:bg-coral/5'
+                  }`}
+                >
+                  {label}
+                </button>
+              );
+            })}
+          </div>
         </ScrollReveal>
 
-        <div className="mx-auto mt-14 max-w-3xl space-y-8 md:mt-16 md:space-y-10">
-          {/* 1. Portrait videos (ROMP, Keen, Wilderdog) — 3 in a row */}
-          <ScrollReveal className="grid grid-cols-1 grid-rows-3 gap-5 md:grid-cols-3 md:grid-rows-1 md:gap-6">
-            {PORTRAIT_VIDEOS.map(({ label, src, youtubeId }) => (
-              <div key={label} className="flex flex-col">
-                <div className="relative aspect-[9/16] w-full overflow-hidden rounded-lg bg-steel/15">
-                  {youtubeId
-                    ? (
-                        /* eslint-disable react-dom/no-unsafe-iframe-sandbox -- YouTube embed needs allow-scripts and allow-same-origin for playback */
-                        <iframe
-                          src={`https://www.youtube-nocookie.com/embed/${youtubeId}?modestbranding=1&rel=0&playsinline=1&iv_load_policy=3`}
-                          title={label}
-                          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                          allowFullScreen
-                          sandbox="allow-scripts allow-same-origin allow-popups"
-                          className="absolute inset-0 h-full w-full object-cover"
-                        />
-                        /* eslint-enable react-dom/no-unsafe-iframe-sandbox */
-                      )
-                    : (
-                        <video
-                          src={src}
-                          controls
-                          preload="metadata"
-                          playsInline
-                          className="h-full w-full object-cover"
-                        >
-                          <track kind="captions" />
-                        </video>
-                      )}
+        <div className="mx-auto mt-14 max-w-3xl md:mt-16">
+          <FilterSection visible={showBrand}>
+            <ScrollReveal className="grid grid-cols-1 grid-rows-3 gap-5 md:grid-cols-3 md:grid-rows-1 md:gap-6">
+              {BRAND_PORTRAIT_VIDEOS.map(({ label, src, youtubeId }) => (
+                <div key={label} className="flex flex-col">
+                  <div className="relative aspect-[9/16] w-full overflow-hidden rounded-lg bg-steel/15">
+                    {youtubeId
+                      ? <YoutubePortraitIframe youtubeId={youtubeId} title={label} />
+                      : (
+                          <video
+                            src={src}
+                            controls
+                            preload="metadata"
+                            playsInline
+                            className="h-full w-full object-cover"
+                          >
+                            <track kind="captions" />
+                          </video>
+                        )}
+                  </div>
+                  <p className="mt-3 text-sm font-medium text-navy md:mt-4">
+                    {label}
+                  </p>
                 </div>
-                <p className="mt-3 text-sm font-medium text-navy md:mt-4">
-                  {label}
-                </p>
-              </div>
-            ))}
-          </ScrollReveal>
+              ))}
+            </ScrollReveal>
 
-          {/* 2. Film (landscape) */}
-          <ScrollReveal key={film.label} className="flex flex-col">
-            <div className="relative aspect-video w-full overflow-hidden rounded-lg bg-steel/15">
-              <video
-                src={film.src}
-                controls
-                preload="metadata"
-                playsInline
-                className="h-full w-full object-contain"
-              >
-                <track kind="captions" />
-              </video>
-            </div>
-            <p className="mt-3 text-sm font-medium text-navy md:mt-4">
-              {film.label}
-            </p>
-          </ScrollReveal>
-
-          {/* 3. Portrait stills — Row 1: Rad Fab x2 */}
-          <ScrollReveal className="grid grid-cols-1 grid-rows-2 gap-5 md:grid-cols-2 md:grid-rows-1 md:gap-6">
-            {IMAGE_ROW_1.map(({ src, label }) => (
-              <div key={src} className="flex flex-col">
-                <button
-                  type="button"
-                  className="relative aspect-[9/16] w-full overflow-hidden rounded-lg bg-steel/15 text-left focus:ring-2 focus:ring-teal focus:ring-offset-2 focus:outline-none"
-                  onClick={() => setLightbox({ src, alt: label })}
+            <ScrollReveal className="mt-8 flex flex-col md:mt-10" staggerIndex={1}>
+              <div className="relative aspect-video w-full overflow-hidden rounded-lg bg-steel/15">
+                <video
+                  src={LANDSCAPE_FILM.src}
+                  controls
+                  preload="metadata"
+                  playsInline
+                  className="h-full w-full object-contain"
                 >
-                  <Image
-                    src={src}
-                    alt={label}
-                    fill
-                    className="object-cover"
-                    sizes="(min-width:768px) 50vw, 100vw"
-                  />
-                </button>
-                <p className="mt-3 text-sm font-medium text-navy md:mt-4">
-                  {label}
-                </p>
+                  <track kind="captions" />
+                </video>
               </div>
-            ))}
-          </ScrollReveal>
+              <p className="mt-3 text-sm font-medium text-navy md:mt-4">
+                {LANDSCAPE_FILM.label}
+              </p>
+            </ScrollReveal>
+          </FilterSection>
 
-          {/* 4. Portrait stills — Row 1: Altra 1+2; Row 2: Rompbag 1+2; Row 3: RadFab 2+3 */}
-          <ScrollReveal className="grid grid-cols-1 grid-rows-2 gap-5 md:grid-cols-2 md:grid-rows-1 md:gap-6">
-            {IMAGE_ROW_2.map(({ src, label }) => (
-              <div key={src} className="flex flex-col">
-                <button
-                  type="button"
-                  className="relative aspect-[9/16] w-full overflow-hidden rounded-lg bg-steel/15 text-left focus:ring-2 focus:ring-teal focus:ring-offset-2 focus:outline-none"
-                  onClick={() => setLightbox({ src, alt: label })}
-                >
-                  <Image
-                    src={src}
-                    alt={label}
-                    fill
-                    className="object-cover"
-                    sizes="(min-width:768px) 50vw, 100vw"
-                  />
-                </button>
-                <p className="mt-3 text-sm font-medium text-navy md:mt-4">
-                  {label}
-                </p>
-              </div>
-            ))}
-          </ScrollReveal>
+          <FilterSection visible={showProductReviews}>
+            <ScrollReveal className="grid grid-cols-1 gap-5 md:grid-cols-3 md:gap-6">
+              {PRODUCT_REVIEW_VIDEOS.map(({ label, youtubeId }) => (
+                <div key={youtubeId} className="flex flex-col md:col-span-1 md:col-start-2">
+                  <div className="relative aspect-[9/16] w-full overflow-hidden rounded-lg bg-steel/15">
+                    <YoutubePortraitIframe youtubeId={youtubeId} title={label} />
+                  </div>
+                  <p className="mt-3 text-sm font-medium text-navy md:mt-4">
+                    {label}
+                  </p>
+                </div>
+              ))}
+            </ScrollReveal>
+          </FilterSection>
 
-          {/* 5. Portrait stills — Row 3 */}
-          <ScrollReveal className="grid grid-cols-1 grid-rows-2 gap-5 md:grid-cols-2 md:grid-rows-1 md:gap-6">
-            {IMAGE_ROW_3.map(({ src, label }) => (
-              <div key={src} className="flex flex-col">
-                <button
-                  type="button"
-                  className="relative aspect-[9/16] w-full overflow-hidden rounded-lg bg-steel/15 text-left focus:ring-2 focus:ring-teal focus:ring-offset-2 focus:outline-none"
-                  onClick={() => setLightbox({ src, alt: label })}
-                >
-                  <Image
-                    src={src}
-                    alt={label}
-                    fill
-                    className="object-cover"
-                    sizes="(min-width:768px) 50vw, 100vw"
-                  />
-                </button>
-                <p className="mt-3 text-sm font-medium text-navy md:mt-4">
-                  {label}
-                </p>
-              </div>
-            ))}
-          </ScrollReveal>
+          <FilterSection visible={showStills}>
+            <ScrollReveal className="grid grid-cols-1 grid-rows-2 gap-5 md:grid-cols-2 md:grid-rows-1 md:gap-6">
+              {IMAGE_ROW_ALTRA.map(({ src, label }) => (
+                <div key={src} className="flex flex-col">
+                  <button
+                    type="button"
+                    className="relative aspect-[9/16] w-full overflow-hidden rounded-lg bg-steel/15 text-left focus:ring-2 focus:ring-teal focus:ring-offset-2 focus:outline-none"
+                    onClick={() => setLightbox({ src, alt: label })}
+                  >
+                    <Image
+                      src={src}
+                      alt={label}
+                      fill
+                      className="object-cover"
+                      sizes="(min-width:768px) 50vw, 100vw"
+                    />
+                  </button>
+                  <p className="mt-3 text-sm font-medium text-navy md:mt-4">
+                    {label}
+                  </p>
+                </div>
+              ))}
+            </ScrollReveal>
+
+            <ScrollReveal className="mt-8 grid grid-cols-1 grid-rows-2 gap-5 md:mt-10 md:grid-cols-2 md:grid-rows-1 md:gap-6" staggerIndex={1}>
+              {IMAGE_ROW_ROMP.map(({ src, label }) => (
+                <div key={src} className="flex flex-col">
+                  <button
+                    type="button"
+                    className="relative aspect-[9/16] w-full overflow-hidden rounded-lg bg-steel/15 text-left focus:ring-2 focus:ring-teal focus:ring-offset-2 focus:outline-none"
+                    onClick={() => setLightbox({ src, alt: label })}
+                  >
+                    <Image
+                      src={src}
+                      alt={label}
+                      fill
+                      className="object-cover"
+                      sizes="(min-width:768px) 50vw, 100vw"
+                    />
+                  </button>
+                  <p className="mt-3 text-sm font-medium text-navy md:mt-4">
+                    {label}
+                  </p>
+                </div>
+              ))}
+            </ScrollReveal>
+
+            <ScrollReveal className="mt-8 grid grid-cols-1 grid-rows-2 gap-5 md:mt-10 md:grid-cols-2 md:grid-rows-1 md:gap-6" staggerIndex={2}>
+              {IMAGE_ROW_RADFAB.map(({ src, label }) => (
+                <div key={src} className="flex flex-col">
+                  <button
+                    type="button"
+                    className="relative aspect-[9/16] w-full overflow-hidden rounded-lg bg-steel/15 text-left focus:ring-2 focus:ring-teal focus:ring-offset-2 focus:outline-none"
+                    onClick={() => setLightbox({ src, alt: label })}
+                  >
+                    <Image
+                      src={src}
+                      alt={label}
+                      fill
+                      className="object-cover"
+                      sizes="(min-width:768px) 50vw, 100vw"
+                    />
+                  </button>
+                  <p className="mt-3 text-sm font-medium text-navy md:mt-4">
+                    {label}
+                  </p>
+                </div>
+              ))}
+            </ScrollReveal>
+          </FilterSection>
         </div>
       </div>
     </section>
