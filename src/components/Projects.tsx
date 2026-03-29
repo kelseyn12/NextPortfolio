@@ -14,13 +14,6 @@ const ACCENT_OVERLAYS = {
 
 type OverlayKey = keyof typeof ACCENT_OVERLAYS;
 
-function shortDescriptor(description: string, maxLength = 72) {
-  if (description.length <= maxLength) {
-    return description;
-  }
-  return `${description.slice(0, maxLength).trim()}…`;
-}
-
 const FEATURED_PARALLAX_FACTOR = 0.12;
 const FEATURED_PARALLAX_MAX_PX = 24;
 
@@ -40,7 +33,7 @@ function ProjectBlock({
       href={project.link}
       target="_blank"
       rel="noopener noreferrer"
-      className={`project-editorial group relative block w-full overflow-hidden rounded-none ${featured ? 'aspect-[4/3] md:aspect-[16/10]' : 'aspect-[4/3] md:aspect-[3/2]'}`}
+      className="project-editorial group relative block aspect-[4/3] w-full overflow-hidden rounded-none bg-steel/15 md:aspect-[3/2]"
       data-featured={featured ? 'true' : undefined}
     >
       {featured
@@ -53,7 +46,7 @@ function ProjectBlock({
                 src={project.image}
                 alt={project.title}
                 fill
-                className="object-cover object-center transition-transform duration-400 ease-out group-hover:scale-[1.04]"
+                className="object-contain object-center transition-transform duration-400 ease-out group-hover:scale-[1.02]"
                 sizes="100vw"
               />
             </div>
@@ -79,13 +72,13 @@ function ProjectBlock({
         />
       )}
       <div
-        className={`absolute inset-0 z-[2] flex flex-col items-center justify-center px-6 py-8 text-center opacity-0 transition-opacity duration-300 ease-out group-focus-within:opacity-100 group-hover:opacity-100 ${overlay}`}
+        className={`absolute inset-0 z-[2] flex flex-col items-center justify-center overflow-y-auto px-6 py-8 text-center opacity-0 transition-opacity duration-300 ease-out group-focus-within:opacity-100 group-hover:opacity-100 ${overlay}`}
       >
-        <h3 className={`mb-2 font-bold text-white ${featured ? 'text-3xl md:text-4xl lg:text-5xl' : 'text-2xl md:text-3xl'}`}>
+        <h3 className={`mb-2 shrink-0 font-bold text-white ${featured ? 'text-3xl md:text-4xl lg:text-5xl' : 'text-2xl md:text-3xl'}`}>
           {project.title}
         </h3>
-        <p className="mb-6 max-w-md text-sm leading-relaxed text-white/95 md:text-base">
-          {shortDescriptor(project.description)}
+        <p className={`mb-6 max-w-md shrink-0 text-sm leading-relaxed text-pretty text-white/95 md:text-base ${featured ? 'md:max-w-lg' : ''}`}>
+          {project.description}
         </p>
         <span className="rounded-lg border border-white/80 bg-white/10 px-5 py-2.5 text-sm font-medium text-white backdrop-blur-sm">
           View case
@@ -97,6 +90,14 @@ function ProjectBlock({
 
 export default function Projects() {
   const projects = [
+    {
+      title: 'End2End Outdoor',
+      description:
+        'Sales representative agency for Big Agnes, La Sportiva, Petzl, and Rab Equipment across the South Central, Midwest, and Great Lakes regions. Rebuilt on Squarespace with full site copywriting.',
+      image: '/images/end2endoutdoors.png',
+      link: 'https://end2endoutdoor.com/',
+      tech: ['Squarespace', 'Copywriting', 'Web design'],
+    },
     {
       title: 'Yosemite Climbing Association',
       description:
@@ -168,7 +169,7 @@ export default function Projects() {
     return ACCENT_OVERLAYS[key];
   };
 
-  const visibleProjects = projects.slice(0, 4);
+  const visibleProjects = projects.slice(0, 5);
   const featured = visibleProjects[0];
   const rest = visibleProjects.slice(1);
   const [featuredParallaxY, setFeaturedParallaxY] = useState(0);
@@ -217,7 +218,7 @@ export default function Projects() {
       </div>
 
       <div className="mx-auto max-w-[90rem] px-4 md:px-8">
-        <div className="grid grid-cols-1 gap-12 pt-12 md:gap-14 md:pt-16 lg:grid-cols-3 lg:gap-8">
+        <div className="grid grid-cols-1 gap-12 pt-12 md:gap-14 md:pt-16 lg:grid-cols-2 lg:gap-8">
           {rest.map((project, idx) => (
             <ScrollReveal key={project.title} staggerIndex={idx < 5 ? idx + 1 : undefined}>
               <ProjectBlock
