@@ -18,11 +18,15 @@ const FILTERS: { id: FilterId; label: string }[] = [
   { id: 'stills', label: 'Stills' },
 ];
 
-/** Brand portrait videos: ROMP (YouTube), Keen, Wilderdog (local). */
+/** Brand portrait videos: ROMP (YouTube), Keen, Wilderdog, Big Agnes (local). */
 const BRAND_PORTRAIT_VIDEOS: { label: string; src?: string; youtubeId?: string }[] = [
   { label: 'ROMP', youtubeId: 'GLqp3npVxrk' },
   { label: 'Keen', src: '/video/Keen.mp4' },
   { label: 'Wilderdog', src: '/video/Wilderdog.mp4' },
+  {
+    label: 'Big Agnes · Larkspur Vest',
+    src: '/video/Big%20Agnes%20Larkspur%20Vest.mp4',
+  },
 ];
 
 /** Product Reviews — YouTube Shorts only. */
@@ -119,7 +123,7 @@ export default function ShortFormContent({
 
         <div className="mx-auto mt-14 max-w-3xl md:mt-16">
           <FilterSection visible={showBrand}>
-            <ScrollReveal className="grid grid-cols-1 grid-rows-3 gap-5 md:grid-cols-3 md:grid-rows-1 md:gap-6">
+            <ScrollReveal className="grid grid-cols-1 gap-5 sm:grid-cols-2 md:gap-6 lg:grid-cols-4">
               {BRAND_PORTRAIT_VIDEOS.map(({ label, src, youtubeId }) => (
                 <div key={label} className="flex flex-col">
                   <div className="relative aspect-[9/16] w-full overflow-hidden rounded-lg bg-steel/15">
