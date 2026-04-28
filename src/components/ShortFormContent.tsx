@@ -20,14 +20,14 @@ const FILTERS: { id: FilterId; label: string }[] = [
 
 /** Brand portrait videos: ROMP (YouTube), Keen, Wilderdog, Big Agnes (local). */
 const BRAND_PORTRAIT_VIDEOS: { label: string; src?: string; youtubeId?: string }[] = [
-  { label: 'ROMP', youtubeId: 'GLqp3npVxrk' },
+  { label: 'ROMP', src: '/video/Romp-v2-web.mp4' },
   {
     label: 'Big Agnes · Larkspur Vest',
-    src: '/video/Big%20Agnes%20Larkspur%20Vest.mp4',
+    src: '/video/Big%20Agnes%20Larkspur%20Vest-web.mp4',
   },
-  { label: 'Cub Cadet', src: '/video/CubCadet.mp4' },
-  { label: 'Wilderdog', src: '/video/Wilderdog.mp4' },
-  { label: 'Keen', src: '/video/Keen.mp4' },
+  { label: 'Cub Cadet', src: '/video/CubCadet-web.mp4' },
+  { label: 'Wilderdog', src: '/video/Wilderdog-web.mp4' },
+  { label: 'Keen', src: '/video/Keen-web.mp4' },
 ];
 
 /** Product Reviews — YouTube Shorts only. */
@@ -35,7 +35,7 @@ const PRODUCT_REVIEW_VIDEOS: { label: string; youtubeId: string }[] = [
   { label: 'DJI Mic Mini', youtubeId: '9KS4jHdY5vg' },
 ];
 
-const LANDSCAPE_FILM = { label: 'Film', src: '/video/Ifilmplaces.mp4' } as const;
+const LANDSCAPE_FILM = { label: 'Film', src: '/video/Ifilmplaces-web.mp4' } as const;
 
 const IMAGE_ROW_ALTRA: { src: string; label: string }[] = [
   { src: '/images/altra1.jpg', label: 'Altra' },
