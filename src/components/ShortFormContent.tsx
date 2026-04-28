@@ -27,6 +27,7 @@ const BRAND_PORTRAIT_VIDEOS: { label: string; src?: string; youtubeId?: string }
     label: 'Big Agnes · Larkspur Vest',
     src: '/video/Big%20Agnes%20Larkspur%20Vest.mp4',
   },
+  { label: 'Cub Cadet', src: '/video/CubCadet.mp4' },
 ];
 
 /** Product Reviews — YouTube Shorts only. */
@@ -123,7 +124,7 @@ export default function ShortFormContent({
 
         <div className="mx-auto mt-14 max-w-3xl md:mt-16">
           <FilterSection visible={showBrand}>
-            <ScrollReveal className="grid grid-cols-1 gap-5 sm:grid-cols-2 md:gap-6 lg:grid-cols-4">
+            <ScrollReveal className="grid grid-cols-1 gap-5 sm:grid-cols-2 md:gap-6 lg:grid-cols-3">
               {BRAND_PORTRAIT_VIDEOS.map(({ label, src, youtubeId }) => (
                 <div key={label} className="flex flex-col">
                   <div className="relative aspect-[9/16] w-full overflow-hidden rounded-lg bg-steel/15">
