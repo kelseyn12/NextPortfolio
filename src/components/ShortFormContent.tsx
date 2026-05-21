@@ -18,10 +18,13 @@ const FILTERS: { id: FilterId; label: string }[] = [
   { id: 'stills', label: 'Stills' },
 ];
 
-/** Brand portrait videos: ROMP (YouTube), Keen, Wilderdog, Big Agnes (local). */
+/** Brand portrait videos (local web-optimized). */
 const BRAND_PORTRAIT_VIDEOS: { label: string; src?: string; youtubeId?: string }[] = [
-  { label: 'ROMP', src: '/video/Romp-v2-web.mp4' },
+  { label: 'Challenger', src: '/video/Challenger%20Backpack-web.mp4' },
   { label: 'Lost Ranger', src: '/video/Lost%20Ranger-web.mp4' },
+  { label: 'ROMP', src: '/video/Romp-v2-web.mp4' },
+  { label: 'Splitwise', src: '/video/Splitwise-web.mp4' },
+  { label: 'Chom Chom', src: '/video/chomchom-web.mp4' },
   {
     label: 'Big Agnes · Larkspur Vest',
     src: '/video/Big%20Agnes%20Larkspur%20Vest-web.mp4',
