@@ -21,6 +21,7 @@ const FILTERS: { id: FilterId; label: string }[] = [
 /** Brand portrait videos: ROMP (YouTube), Keen, Wilderdog, Big Agnes (local). */
 const BRAND_PORTRAIT_VIDEOS: { label: string; src?: string; youtubeId?: string }[] = [
   { label: 'ROMP', src: '/video/Romp-v2-web.mp4' },
+  { label: 'Lost Ranger', src: '/video/Lost%20Ranger-web.mp4' },
   {
     label: 'Big Agnes · Larkspur Vest',
     src: '/video/Big%20Agnes%20Larkspur%20Vest-web.mp4',
@@ -28,7 +29,6 @@ const BRAND_PORTRAIT_VIDEOS: { label: string; src?: string; youtubeId?: string }
   { label: 'Cub Cadet', src: '/video/CubCadet-web.mp4' },
   { label: 'Wilderdog', src: '/video/Wilderdog-web.mp4' },
   { label: 'Keen', src: '/video/Keen-web.mp4' },
-  { label: 'Lost Ranger', src: '/video/Lost%20Ranger-web.mp4' },
 ];
 
 /** Product Reviews — YouTube Shorts only. */
