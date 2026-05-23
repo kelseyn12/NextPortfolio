@@ -1,7 +1,7 @@
 'use client';
 
 import Image from 'next/image';
-import { useCallback, useState } from 'react';
+import { useCallback, useMemo, useState } from 'react';
 import ScrollReveal from '@/components/ScrollReveal';
 import {
   FilterSection,
@@ -9,37 +9,74 @@ import {
   YoutubePortraitIframe,
 } from '@/components/short-form/shortFormMedia';
 
-type FilterId = 'all' | 'brand-content' | 'product-reviews' | 'stills';
+type VideoCategory
+  = | 'product-demo'
+    | 'product-reviews'
+    | 'testimonial'
+    | 'broll-vo'
+    | 'greenscreen'
+    | 'skit'
+    | 'story';
+
+type FilterId = 'all' | VideoCategory | 'stills';
+
+const CATEGORY_LABELS: Record<VideoCategory, string> = {
+  'product-demo': 'Product Demo',
+  'product-reviews': 'Product Reviews',
+  'testimonial': 'Testimonial',
+  'broll-vo': 'B-Roll + VO',
+  'greenscreen': 'Greenscreen',
+  'skit': 'Skit',
+  'story': 'Story',
+};
 
 const FILTERS: { id: FilterId; label: string }[] = [
   { id: 'all', label: 'All' },
-  { id: 'brand-content', label: 'Brand Content' },
+  { id: 'product-demo', label: 'Product Demo' },
   { id: 'product-reviews', label: 'Product Reviews' },
+  { id: 'testimonial', label: 'Testimonial' },
+  { id: 'broll-vo', label: 'B-Roll + VO' },
+  { id: 'greenscreen', label: 'Greenscreen' },
+  { id: 'skit', label: 'Skit' },
+  { id: 'story', label: 'Story' },
   { id: 'stills', label: 'Stills' },
 ];
 
-/** Brand portrait videos (local web-optimized). */
-const BRAND_PORTRAIT_VIDEOS: { label: string; src?: string; youtubeId?: string }[] = [
-  { label: 'Challenger', src: '/video/Challenger%20Backpack-web.mp4' },
-  { label: 'Lost Ranger', src: '/video/Lost%20Ranger-web.mp4' },
-  { label: 'ROMP', src: '/video/Romp-v2-web.mp4' },
-  { label: 'Splitwise', src: '/video/Splitwise-web.mp4' },
-  { label: 'Chom Chom', src: '/video/chomchom-web.mp4' },
+type PortraitVideo = {
+  label: string;
+  category: VideoCategory;
+  src?: string;
+  youtubeId?: string;
+};
+
+type LandscapeVideo = {
+  label: string;
+  category: VideoCategory;
+  src: string;
+};
+
+/** Display order when filter is All. */
+const PORTRAIT_VIDEOS: PortraitVideo[] = [
+  { label: 'Challenger', category: 'skit', src: '/video/Challenger%20Backpack-web.mp4' },
+  { label: 'Lost Ranger', category: 'broll-vo', src: '/video/Lost%20Ranger-web.mp4' },
+  { label: 'ROMP', category: 'story', src: '/video/Romp-v2-web.mp4' },
+  { label: 'Splitwise', category: 'greenscreen', src: '/video/Splitwise-web.mp4' },
+  { label: 'Chom Chom', category: 'product-demo', src: '/video/chomchom-web.mp4' },
   {
     label: 'Big Agnes · Larkspur Vest',
+    category: 'testimonial',
     src: '/video/Big%20Agnes%20Larkspur%20Vest-web.mp4',
   },
-  { label: 'Cub Cadet', src: '/video/CubCadet-web.mp4' },
-  { label: 'Wilderdog', src: '/video/Wilderdog-web.mp4' },
-  { label: 'Keen', src: '/video/Keen-web.mp4' },
+  { label: 'Cub Cadet', category: 'product-demo', src: '/video/CubCadet-web.mp4' },
+  { label: 'Wilderdog', category: 'testimonial', src: '/video/Wilderdog-web.mp4' },
+  { label: 'Keen', category: 'testimonial', src: '/video/Keen-web.mp4' },
+  { label: 'Toms', category: 'testimonial', src: '/video/Toms-web.mp4' },
+  { label: 'DJI Mic Mini', category: 'product-reviews', youtubeId: '9KS4jHdY5vg' },
 ];
 
-/** Product Reviews — YouTube Shorts only. */
-const PRODUCT_REVIEW_VIDEOS: { label: string; youtubeId: string }[] = [
-  { label: 'DJI Mic Mini', youtubeId: '9KS4jHdY5vg' },
+const LANDSCAPE_VIDEOS: LandscapeVideo[] = [
+  { label: 'I film places', category: 'story', src: '/video/Ifilmplaces-web.mp4' },
 ];
-
-const LANDSCAPE_FILM = { label: 'Film', src: '/video/Ifilmplaces-web.mp4' } as const;
 
 const IMAGE_ROW_ALTRA: { src: string; label: string }[] = [
   { src: '/images/altra1.jpg', label: 'Altra' },
@@ -53,6 +90,47 @@ const IMAGE_ROW_RADFAB: { src: string; label: string }[] = [
   { src: '/images/RadFabJeans2.JPG', label: 'Rad Fab Denim' },
   { src: '/images/RadFabJeans3.JPG', label: 'Rad Fab Denim' },
 ];
+
+function matchesFilter(category: VideoCategory, activeFilter: FilterId): boolean {
+  return activeFilter === 'all' || activeFilter === category;
+}
+
+function PortraitVideoCard({
+  video,
+  showCategory,
+}: {
+  video: PortraitVideo;
+  showCategory: boolean;
+}) {
+  const { label, category, src, youtubeId } = video;
+  return (
+    <div className="flex flex-col">
+      <div className="relative aspect-[9/16] w-full overflow-hidden rounded-lg bg-steel/15">
+        {youtubeId
+          ? <YoutubePortraitIframe youtubeId={youtubeId} title={label} />
+          : (
+              <video
+                src={src}
+                controls
+                preload="metadata"
+                playsInline
+                className="h-full w-full object-cover"
+              >
+                <track kind="captions" />
+              </video>
+            )}
+      </div>
+      <p className="mt-3 text-sm font-medium text-navy md:mt-4">
+        {label}
+      </p>
+      {showCategory && (
+        <p className="mt-1 text-xs text-steel">
+          {CATEGORY_LABELS[category]}
+        </p>
+      )}
+    </div>
+  );
+}
 
 type ShortFormContentProps = {
   title?: string;
@@ -72,9 +150,19 @@ export default function ShortFormContent({
   const [lightbox, setLightbox] = useState<{ src: string; alt: string } | null>(null);
   const closeLightbox = useCallback(() => setLightbox(null), []);
 
-  const showBrand = activeFilter === 'all' || activeFilter === 'brand-content';
-  const showProductReviews = activeFilter === 'all' || activeFilter === 'product-reviews';
+  const visiblePortraits = useMemo(
+    () => PORTRAIT_VIDEOS.filter(v => matchesFilter(v.category, activeFilter)),
+    [activeFilter],
+  );
+  const visibleLandscape = useMemo(
+    () => LANDSCAPE_VIDEOS.filter(v => matchesFilter(v.category, activeFilter)),
+    [activeFilter],
+  );
+  const showVideos
+    = activeFilter !== 'stills'
+      && (visiblePortraits.length > 0 || visibleLandscape.length > 0);
   const showStills = activeFilter === 'all' || activeFilter === 'stills';
+  const showCategoryOnCards = activeFilter === 'all';
 
   return (
     <section id="short-form" className="relative px-4 py-16 md:px-8 md:py-20">
@@ -127,63 +215,46 @@ export default function ShortFormContent({
         </ScrollReveal>
 
         <div className="mx-auto mt-14 max-w-3xl md:mt-16">
-          <FilterSection visible={showBrand}>
-            <ScrollReveal className="grid grid-cols-1 gap-5 sm:grid-cols-2 md:gap-6 lg:grid-cols-3">
-              {BRAND_PORTRAIT_VIDEOS.map(({ label, src, youtubeId }) => (
-                <div key={label} className="flex flex-col">
-                  <div className="relative aspect-[9/16] w-full overflow-hidden rounded-lg bg-steel/15">
-                    {youtubeId
-                      ? <YoutubePortraitIframe youtubeId={youtubeId} title={label} />
-                      : (
-                          <video
-                            src={src}
-                            controls
-                            preload="metadata"
-                            playsInline
-                            className="h-full w-full object-cover"
-                          >
-                            <track kind="captions" />
-                          </video>
-                        )}
-                  </div>
-                  <p className="mt-3 text-sm font-medium text-navy md:mt-4">
-                    {label}
-                  </p>
-                </div>
-              ))}
-            </ScrollReveal>
+          <FilterSection visible={showVideos}>
+            {visiblePortraits.length > 0 && (
+              <ScrollReveal className="grid grid-cols-1 gap-5 sm:grid-cols-2 md:gap-6 lg:grid-cols-3">
+                {visiblePortraits.map(video => (
+                  <PortraitVideoCard
+                    key={video.youtubeId ?? video.src ?? video.label}
+                    video={video}
+                    showCategory={showCategoryOnCards}
+                  />
+                ))}
+              </ScrollReveal>
+            )}
 
-            <ScrollReveal className="mt-8 flex flex-col md:mt-10" staggerIndex={1}>
-              <div className="relative aspect-video w-full overflow-hidden rounded-lg bg-steel/15">
-                <video
-                  src={LANDSCAPE_FILM.src}
-                  controls
-                  preload="metadata"
-                  playsInline
-                  className="h-full w-full object-contain"
-                >
-                  <track kind="captions" />
-                </video>
-              </div>
-              <p className="mt-3 text-sm font-medium text-navy md:mt-4">
-                {LANDSCAPE_FILM.label}
-              </p>
-            </ScrollReveal>
-          </FilterSection>
-
-          <FilterSection visible={showProductReviews}>
-            <ScrollReveal className="grid grid-cols-1 gap-5 md:grid-cols-3 md:gap-6">
-              {PRODUCT_REVIEW_VIDEOS.map(({ label, youtubeId }) => (
-                <div key={youtubeId} className="flex flex-col md:col-span-1 md:col-start-2">
-                  <div className="relative aspect-[9/16] w-full overflow-hidden rounded-lg bg-steel/15">
-                    <YoutubePortraitIframe youtubeId={youtubeId} title={label} />
-                  </div>
-                  <p className="mt-3 text-sm font-medium text-navy md:mt-4">
-                    {label}
-                  </p>
+            {visibleLandscape.map((video, index) => (
+              <ScrollReveal
+                key={video.src}
+                className={`flex flex-col ${visiblePortraits.length > 0 ? 'mt-8 md:mt-10' : ''}`}
+                staggerIndex={visiblePortraits.length > 0 ? index + 1 : index}
+              >
+                <div className="relative aspect-video w-full overflow-hidden rounded-lg bg-steel/15">
+                  <video
+                    src={video.src}
+                    controls
+                    preload="metadata"
+                    playsInline
+                    className="h-full w-full object-contain"
+                  >
+                    <track kind="captions" />
+                  </video>
                 </div>
-              ))}
-            </ScrollReveal>
+                <p className="mt-3 text-sm font-medium text-navy md:mt-4">
+                  {video.label}
+                </p>
+                {showCategoryOnCards && (
+                  <p className="mt-1 text-xs text-steel">
+                    {CATEGORY_LABELS[video.category]}
+                  </p>
+                )}
+              </ScrollReveal>
+            ))}
           </FilterSection>
 
           <FilterSection visible={showStills}>
