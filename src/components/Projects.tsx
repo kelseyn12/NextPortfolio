@@ -28,11 +28,12 @@ function ProjectBlock({
   featured?: boolean;
   parallaxY?: number;
 }) {
+  const isInternal = project.link.startsWith('/');
   return (
     <a
       href={project.link}
-      target="_blank"
-      rel="noopener noreferrer"
+      target={isInternal ? undefined : '_blank'}
+      rel={isInternal ? undefined : 'noopener noreferrer'}
       className="project-editorial group relative block aspect-[4/3] w-full overflow-hidden rounded-none bg-steel/15 md:aspect-[3/2]"
       data-featured={featured ? 'true' : undefined}
     >
@@ -95,7 +96,7 @@ export default function Projects() {
       description:
         'Sales representative agency for Big Agnes, La Sportiva, Petzl, and Rab Equipment across the South Central, Midwest, and Great Lakes regions. Rebuilt on Squarespace with full site copywriting.',
       image: '/images/end2endoutdoors.png',
-      link: 'https://end2endoutdoor.com/',
+      link: '/work/end2end-outdoor',
       tech: ['Squarespace', 'Copywriting', 'Web design'],
     },
     {
@@ -103,7 +104,7 @@ export default function Projects() {
       description:
         'A Shopify app supporting Yosemite Climbing Association and the Yosemite Climbing Museum',
       image: '/images/yosemite.png',
-      link: 'https://yosemiteclimbing.myshopify.com/',
+      link: '/work/yosemite-climbing',
       tech: ['Shopify', 'GiveCloud', 'SquareSpace', 'Google Analytics', 'HTML', 'CSS', 'JavaScript'],
     },
     {
@@ -119,7 +120,7 @@ export default function Projects() {
       description:
         'Built custom pages (About Us, Staff Bios, Rentals, Service) with personality-driven design for a local bike shop.',
       image: '/images/continental.png',
-      link: 'https://www.continentalski.com/',
+      link: '/work/continental-ski-bike',
       tech: ['HTML', 'CSS', 'JavaScript', 'WorkStand'],
     },
     {
@@ -127,7 +128,7 @@ export default function Projects() {
       description:
         'Originally built in Gatsby, later transitioned to Squarespace while keeping design consistent.',
       image: '/images/DGE.png',
-      link: 'https://duluthgearexchange.netlify.app/',
+      link: '/work/duluth-gear-exchange',
       tech: ['Gatsby', 'React', 'Contentful', 'GraphQL', 'Squarespace'],
     },
     {
