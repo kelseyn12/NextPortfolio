@@ -91,13 +91,13 @@ export default function Hero() {
       {/* Headline and copy directly over the image */}
       <div className="relative z-10 mx-auto max-w-4xl px-6 py-20 text-center">
         <h1 className="animate-fade-in-up mb-5 text-6xl leading-tight font-extrabold text-white opacity-0 drop-shadow-[0_2px_20px_rgba(0,0,0,0.4)] delay-200 md:mb-6 md:text-7xl lg:text-8xl xl:text-9xl">
-          Hello, I&apos;m Kelsey!
+          Hi, I&apos;m Kelsey
         </h1>
         <p className="animate-fade-in-up mb-4 text-xl font-semibold tracking-wide text-white/95 opacity-0 delay-400 md:text-2xl">
-          Digital Product Designer & Developer
+          Squarespace, Shopify &amp; Custom Web Developer
         </p>
         <p className="animate-fade-in-up mx-auto mb-10 max-w-2xl text-lg leading-relaxed text-white/90 opacity-0 delay-500 md:mb-12 md:text-xl">
-          I design and build digital experiences, and create short-form brand content for surf, bike, climbing and adventure communities.
+          I design and build custom Squarespace and Shopify sites for small businesses and outdoor brands — clean code, clear communication, no surprises.
         </p>
         <a
           href="#projects"

@@ -24,16 +24,18 @@ export default function Navbar() {
           <div className="flex gap-8 font-medium text-navy">
             {[
               { id: 'projects', label: 'Selected Work' },
-              { id: 'short-form', label: 'Short-Form', path: '/short-form' },
+              { id: 'short-form', label: 'Short-Form', path: 'https://ugc.kelseynocek.com', external: true },
               { id: 'how-i-work', label: 'Process' },
               { id: 'personality', label: 'Outside Work' },
               { id: 'contact', label: 'Contact' },
-            ].map(({ id, label, path }) =>
+            ].map(({ id, label, path, external }) =>
               path
                 ? (
                     <Link
                       key={id}
                       href={path}
+                      target={external ? '_blank' : undefined}
+                      rel={external ? 'noopener noreferrer' : undefined}
                       className="group relative"
                       onClick={() => setMenuOpen(false)}
                     >
@@ -82,16 +84,18 @@ export default function Navbar() {
       >
         {[
           { id: 'projects', label: 'Selected Work' },
-          { id: 'short-form', label: 'Short-Form', path: '/short-form' },
+          { id: 'short-form', label: 'Short-Form', path: 'https://ugc.kelseynocek.com', external: true },
           { id: 'how-i-work', label: 'Process' },
           { id: 'personality', label: 'Outside Work' },
           { id: 'contact', label: 'Contact' },
-        ].map(({ id, label, path }) =>
+        ].map(({ id, label, path, external }) =>
           path
             ? (
                 <Link
                   key={id}
                   href={path}
+                  target={external ? '_blank' : undefined}
+                  rel={external ? 'noopener noreferrer' : undefined}
                   className="text-navy transition hover:text-teal"
                   onClick={() => setMenuOpen(false)}
                 >
