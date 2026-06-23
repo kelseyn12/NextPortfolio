@@ -1,7 +1,10 @@
 import type { Metadata } from 'next';
+import Script from 'next/script';
 import Navbar from '@/components/Navbar';
 import PageLayers from '@/components/PageLayers';
 import '../styles/global.css';
+
+const GA_MEASUREMENT_ID = 'G-Z1D82SJ5K4';
 
 export const metadata: Metadata = {
   metadataBase: new URL('https://www.kelseynocek.com'),
@@ -64,6 +67,18 @@ export default function RootLayout({
   return (
     <html lang="en" className="scroll-smooth">
       <body className="font-sans">
+        <Script
+          src={`https://www.googletagmanager.com/gtag/js?id=${GA_MEASUREMENT_ID}`}
+          strategy="afterInteractive"
+        />
+        <Script id="ga4-init" strategy="afterInteractive">
+          {`
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+            gtag('config', '${GA_MEASUREMENT_ID}');
+          `}
+        </Script>
         <PageLayers />
         <Navbar />
         <main className="relative z-10 pt-20">{children}</main>
